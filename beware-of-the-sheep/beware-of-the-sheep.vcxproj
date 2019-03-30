@@ -84,6 +84,25 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Entities\Animal.h" />
+    <ClInclude Include="src\Entities\Animals\Antelope.h" />
+    <ClInclude Include="src\Entities\Animals\CyberSheep.h" />
+    <ClInclude Include="src\Entities\Animals\Fox.h" />
+    <ClInclude Include="src\Entities\Animals\Human.h" />
+    <ClInclude Include="src\Entities\Animals\Sheep.h" />
+    <ClInclude Include="src\Entities\Animals\Turtle.h" />
+    <ClInclude Include="src\Entities\Animals\Wolf.h" />
+    <ClInclude Include="src\Entities\Entity.h" />
+    <ClInclude Include="src\Entities\Plant.h" />
+    <ClInclude Include="src\Entities\Plants\Belladonna.h" />
+    <ClInclude Include="src\Entities\Plants\Dandelion.h" />
+    <ClInclude Include="src\Entities\Plants\Grass.h" />
+    <ClInclude Include="src\Entities\Plants\Guarana.h" />
+    <ClInclude Include="src\Entities\Plants\Hogweed.h" />
+    <ClInclude Include="src\Point.h" />
+    <ClInclude Include="src\World.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

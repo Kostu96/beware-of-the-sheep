@@ -1,5 +1,5 @@
 #pragma once
-#include "Point.h"
+#include "../Point.h"
 
 namespace bots {
 	
@@ -10,6 +10,8 @@ namespace bots {
 	class Entity
 	{
 	public:
+		virtual ~Entity() = default;
+
 		virtual void action() = 0;
 		virtual void collision(const Entity & other) = 0;
 		virtual void draw() const = 0;
