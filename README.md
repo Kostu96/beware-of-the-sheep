@@ -1,2 +1,3 @@
-# beware-of-the-sheep
-Simulation/Game for Object Programming practicals.
+# Beware Of The Sheep
+
+Turn-based simulation/game about plants and animals in virtual world.
