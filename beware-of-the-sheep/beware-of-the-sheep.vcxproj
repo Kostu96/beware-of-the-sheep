@@ -82,7 +82,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Entities\Entity.cpp" />
+    <ClCompile Include="src\Entities\Plant.cpp" />
+    <ClCompile Include="src\Entities\Plants\Belladonna.cpp" />
+    <ClCompile Include="src\Entities\Plants\Dandelion.cpp" />
+    <ClCompile Include="src\Entities\Plants\Grass.cpp" />
+    <ClCompile Include="src\Entities\Plants\Guarana.cpp" />
+    <ClCompile Include="src\Entities\Plants\Hogweed.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Entities\Animal.h" />

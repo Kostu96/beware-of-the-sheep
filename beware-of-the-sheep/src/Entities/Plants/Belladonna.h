@@ -11,10 +11,11 @@ namespace bots {
 		public Plant
 	{
 	public:
-		Belladona() = default;
+		Belladona(World & world, const Point & position);
 		virtual ~Belladona() = default;
-	protected:
 
+		void collision(const Entity & other) override;
+		void draw() const override;
 	private:
 
 	};

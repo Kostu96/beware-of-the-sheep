@@ -11,10 +11,12 @@ namespace bots {
 		public Plant
 	{
 	public:
-		Hogweed() = default;
+		Hogweed(World & world, const Point & position);
 		virtual ~Hogweed() = default;
-	protected:
 
+		void action() override;
+		void collision(const Entity & other) override;
+		void draw() const override;
 	private:
 
 	};

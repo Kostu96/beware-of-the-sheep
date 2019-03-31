@@ -11,10 +11,11 @@ namespace bots {
 		public Plant
 	{
 	public:
-		Guarana() = default;
+		Guarana(World & world, const Point & position);
 		virtual ~Guarana() = default;
-	protected:
 
+		void collision(const Entity & other) override;
+		void draw() const override;
 	private:
 
 	};

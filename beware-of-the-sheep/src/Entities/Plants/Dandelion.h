@@ -11,10 +11,12 @@ namespace bots {
 		public Plant
 	{
 	public:
-		Dandelion() = default;
+		Dandelion(World & world, const Point & position);
 		virtual ~Dandelion() = default;
-	protected:
 
+		void action() override;
+		void collision(const Entity & other) override {}
+		void draw() const override;
 	private:
 
 	};
