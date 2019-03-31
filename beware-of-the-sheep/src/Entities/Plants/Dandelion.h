@@ -15,7 +15,6 @@ namespace bots {
 		virtual ~Dandelion() = default;
 
 		void action() override;
-		void collision(const Entity & other) override {}
 		void draw() const override;
 	private:
 

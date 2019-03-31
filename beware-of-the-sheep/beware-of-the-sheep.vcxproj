@@ -82,6 +82,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Entities\Animal.cpp" />
+    <ClCompile Include="src\Entities\Animals\Antelope.cpp" />
+    <ClCompile Include="src\Entities\Animals\CyberSheep.cpp" />
+    <ClCompile Include="src\Entities\Animals\Fox.cpp" />
     <ClCompile Include="src\Entities\Entity.cpp" />
     <ClCompile Include="src\Entities\Plant.cpp" />
     <ClCompile Include="src\Entities\Plants\Belladonna.cpp" />

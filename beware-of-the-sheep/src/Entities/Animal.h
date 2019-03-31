@@ -11,9 +11,11 @@ namespace bots {
 		public Entity
 	{
 	public:
+		Animal(World & world, const Point & position, unsigned int strength, unsigned int initiative);
 		virtual ~Animal() = default;
-	protected:
 
+		void action() override;
+		void collision(const Entity & other) override;
 	private:
 
 	};

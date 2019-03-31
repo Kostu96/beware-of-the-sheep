@@ -11,10 +11,11 @@ namespace bots {
 		public Animal
 	{
 	public:
-		Fox() = default;
+		Fox(World & world, const Point & position);
 		virtual ~Fox() = default;
-	protected:
 
+		void action() override;
+		void draw() const override;
 	private:
 
 	};

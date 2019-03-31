@@ -11,10 +11,12 @@ namespace bots {
 		public Animal
 	{
 	public:
-		Antelope() = default;
+		Antelope(World & world, const Point & position);
 		virtual ~Antelope() = default;
-	protected:
 
+		void action() override;
+		void collision(const Entity & other) override;
+		void draw() const override;
 	private:
 
 	};

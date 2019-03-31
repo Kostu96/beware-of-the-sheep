@@ -14,7 +14,6 @@ namespace bots {
 		Grass(World & world, const Point & position);
 		virtual ~Grass() = default;
 
-		void collision(const Entity & other) override {}
 		void draw() const override;
 	private:
 

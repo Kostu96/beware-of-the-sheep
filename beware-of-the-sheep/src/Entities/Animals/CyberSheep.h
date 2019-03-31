@@ -1,5 +1,5 @@
 #pragma once
-#include "Sheep.h"
+#include "../Animal.h"
 
 namespace bots {
 
@@ -8,13 +8,15 @@ namespace bots {
 		\author	Konstanty Misiak
 	*/
 	class CyberSheep :
-		public Sheep
+		public Animal
 	{
 	public:
-		CyberSheep() = default;
+		CyberSheep(World & world, const Point & position);
 		virtual ~CyberSheep() = default;
-	protected:
 
+		void action() override;
+		void collision(const Entity & other) override;
+		void draw() const override;
 	private:
 
 	};

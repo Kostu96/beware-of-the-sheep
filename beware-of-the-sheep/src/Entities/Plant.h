@@ -15,6 +15,7 @@ namespace bots {
 		virtual ~Plant() = default;
 
 		void action() override;
+		void collision(const Entity & other) override {}
 	private:
 
 	};
