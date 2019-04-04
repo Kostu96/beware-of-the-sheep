@@ -20,6 +20,8 @@ namespace bots {
 		inline unsigned int getWidth() const { return m_height; }
 		inline unsigned int getHeight() const { return m_width; }
 	private:
+		void print();
+
 		unsigned int m_width, m_height;
 		Area m_area;
 		std::vector<Entity *> m_entities;

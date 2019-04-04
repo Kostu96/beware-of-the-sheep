@@ -87,6 +87,10 @@
     <ClCompile Include="src\Entities\Animals\Antelope.cpp" />
     <ClCompile Include="src\Entities\Animals\CyberSheep.cpp" />
     <ClCompile Include="src\Entities\Animals\Fox.cpp" />
+    <ClCompile Include="src\Entities\Animals\Human.cpp" />
+    <ClCompile Include="src\Entities\Animals\Sheep.cpp" />
+    <ClCompile Include="src\Entities\Animals\Turtle.cpp" />
+    <ClCompile Include="src\Entities\Animals\Wolf.cpp" />
     <ClCompile Include="src\Entities\Entity.cpp" />
     <ClCompile Include="src\Entities\Plants\Plant.cpp" />
     <ClCompile Include="src\Entities\Plants\Belladonna.cpp" />

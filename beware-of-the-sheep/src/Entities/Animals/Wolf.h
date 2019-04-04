@@ -11,10 +11,10 @@ namespace bots {
 		public Animal
 	{
 	public:
-		Wolf() = default;
+		Wolf(World & world, const Point & position);
 		virtual ~Wolf() = default;
 	protected:
-
+		inline const char * getSymbol() const override { return "WF"; }
 	private:
 
 	};

@@ -11,10 +11,12 @@ namespace bots {
 		public Animal
 	{
 	public:
-		Human() = default;
+		Human(World & world, const Point & position);
 		virtual ~Human() = default;
-	protected:
 
+		// TODO: add action and collision
+	protected:
+		inline const char * getSymbol() const override { return "HM"; }
 	private:
 
 	};

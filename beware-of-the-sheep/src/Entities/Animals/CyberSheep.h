@@ -16,6 +16,8 @@ namespace bots {
 
 		void action() override;
 		void collision(const Entity & other) override;
+	protected:
+		inline const char * getSymbol() const override { return "CP"; }
 	private:
 
 	};

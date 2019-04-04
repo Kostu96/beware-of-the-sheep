@@ -22,15 +22,23 @@ namespace bots {
 	{
 		while (true)
 		{
-			m_area.clear();
-
-			for (const auto & e : m_entities)
-				e->draw(m_area);
-
-			m_area.print();
+			print();
 
 			std::cin.get();
 		}
+	}
+
+	void World::print()
+	{
+		std::system("cls");
+		std::cout << "Kontanty Misiak 175524\n\n";
+
+		m_area.clear();
+
+		for (const auto & e : m_entities)
+			e->draw(m_area);
+
+		m_area.print();
 	}
 
 } // namepace bots
