@@ -10,8 +10,4 @@ namespace bots {
 	{
 	}
 
-	void Fox::draw() const
-	{
-	}
-
 } // namespace bots

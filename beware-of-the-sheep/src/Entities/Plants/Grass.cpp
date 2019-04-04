@@ -6,8 +6,4 @@ namespace bots {
 		Plant(world, position)
 	{}
 
-	void Grass::draw() const
-	{
-	}
-
 } // namespace bots

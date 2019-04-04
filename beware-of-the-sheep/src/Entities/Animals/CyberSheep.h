@@ -1,5 +1,5 @@
 #pragma once
-#include "../Animal.h"
+#include "Animal.h"
 
 namespace bots {
 
@@ -16,7 +16,6 @@ namespace bots {
 
 		void action() override;
 		void collision(const Entity & other) override;
-		void draw() const override;
 	private:
 
 	};

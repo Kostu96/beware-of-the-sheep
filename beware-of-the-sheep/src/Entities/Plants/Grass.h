@@ -1,5 +1,5 @@
 #pragma once
-#include "../Plant.h"
+#include "Plant.h"
 
 namespace bots {
 
@@ -13,8 +13,6 @@ namespace bots {
 	public:
 		Grass(World & world, const Point & position);
 		virtual ~Grass() = default;
-
-		void draw() const override;
 	private:
 
 	};

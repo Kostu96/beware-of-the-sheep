@@ -1,5 +1,5 @@
 #pragma once
-#include "../Animal.h"
+#include "Animal.h"
 
 namespace bots {
 
@@ -15,7 +15,6 @@ namespace bots {
 		virtual ~Fox() = default;
 
 		void action() override;
-		void draw() const override;
 	private:
 
 	};

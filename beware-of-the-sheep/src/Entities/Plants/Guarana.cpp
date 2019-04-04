@@ -10,8 +10,4 @@ namespace bots {
 	{
 	}
 
-	void Guarana::draw() const
-	{
-	}
-
 } // namespace bots

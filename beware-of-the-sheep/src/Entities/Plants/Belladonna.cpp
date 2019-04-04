@@ -10,8 +10,4 @@ namespace bots {
 	{
 	}
 
-	void Belladona::draw() const
-	{
-	}
-
 } // namespace bots

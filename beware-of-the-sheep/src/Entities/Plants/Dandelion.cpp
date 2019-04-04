@@ -14,8 +14,4 @@ namespace bots {
 		Plant::action();
 	}
 
-	void Dandelion::draw() const
-	{
-	}
-
 } // namespace bots

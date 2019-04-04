@@ -1,5 +1,5 @@
 #pragma once
-#include "../Plant.h"
+#include "Plant.h"
 
 namespace bots {
 
@@ -15,7 +15,6 @@ namespace bots {
 		virtual ~Dandelion() = default;
 
 		void action() override;
-		void draw() const override;
 	private:
 
 	};

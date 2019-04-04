@@ -15,8 +15,4 @@ namespace bots {
 	{
 	}
 
-	void Antelope::draw() const
-	{
-	}
-
 } // namespace bots

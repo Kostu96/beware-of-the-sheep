@@ -14,8 +14,4 @@ namespace bots {
 	{
 	}
 
-	void CyberSheep::draw() const
-	{
-	}
-
 } // namespace bots

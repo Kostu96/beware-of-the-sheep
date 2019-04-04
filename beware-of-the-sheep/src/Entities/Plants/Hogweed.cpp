@@ -14,8 +14,4 @@ namespace bots {
 	{
 	}
 
-	void Hogweed::draw() const
-	{
-	}
-
 } // namespace bots

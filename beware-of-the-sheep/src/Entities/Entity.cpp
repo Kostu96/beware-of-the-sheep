@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include "../World.h"
+#include "../Area.h"
 
 namespace bots {
 
@@ -10,12 +11,17 @@ namespace bots {
 		m_initiative(initiative)
 	{}
 
+	void Entity::draw(Area & area) const
+	{
+		area.put(m_position, getSymbol());
+	}
+
 	void Entity::move(unsigned int x, unsigned int y)
 	{
 		m_position.x += x;
-		m_position.x %= m_world.getSizeX();
+		m_position.x %= m_world.getWidth();
 		m_position.y += y;
-		m_position.y %= m_world.getSizeY();
+		m_position.y %= m_world.getHeight();
 	}
 
 } // namespace bots

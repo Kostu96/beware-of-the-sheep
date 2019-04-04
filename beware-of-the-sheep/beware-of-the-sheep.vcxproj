@@ -82,12 +82,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Entities\Animal.cpp" />
+    <ClCompile Include="src\Area.cpp" />
+    <ClCompile Include="src\Entities\Animals\Animal.cpp" />
     <ClCompile Include="src\Entities\Animals\Antelope.cpp" />
     <ClCompile Include="src\Entities\Animals\CyberSheep.cpp" />
     <ClCompile Include="src\Entities\Animals\Fox.cpp" />
     <ClCompile Include="src\Entities\Entity.cpp" />
-    <ClCompile Include="src\Entities\Plant.cpp" />
+    <ClCompile Include="src\Entities\Plants\Plant.cpp" />
     <ClCompile Include="src\Entities\Plants\Belladonna.cpp" />
     <ClCompile Include="src\Entities\Plants\Dandelion.cpp" />
     <ClCompile Include="src\Entities\Plants\Grass.cpp" />
@@ -97,7 +98,9 @@
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Entities\Animal.h" />
+    <ClInclude Include="src\Area.h" />
+    <ClInclude Include="src\Entities\Animals\Animal.h" />
+    <ClInclude Include="src\Entities\Animals.h" />
     <ClInclude Include="src\Entities\Animals\Antelope.h" />
     <ClInclude Include="src\Entities\Animals\CyberSheep.h" />
     <ClInclude Include="src\Entities\Animals\Fox.h" />
@@ -106,7 +109,8 @@
     <ClInclude Include="src\Entities\Animals\Turtle.h" />
     <ClInclude Include="src\Entities\Animals\Wolf.h" />
     <ClInclude Include="src\Entities\Entity.h" />
-    <ClInclude Include="src\Entities\Plant.h" />
+    <ClInclude Include="src\Entities\Plants.h" />
+    <ClInclude Include="src\Entities\Plants\Plant.h" />
     <ClInclude Include="src\Entities\Plants\Belladonna.h" />
     <ClInclude Include="src\Entities\Plants\Dandelion.h" />
     <ClInclude Include="src\Entities\Plants\Grass.h" />

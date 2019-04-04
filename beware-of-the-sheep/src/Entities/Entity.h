@@ -4,6 +4,7 @@
 namespace bots {
 	
 	class World;
+	class Area;
 
 	/*!
 		\brief	Class representing entities in the world.
@@ -17,13 +18,15 @@ namespace bots {
 
 		virtual void action() = 0;
 		virtual void collision(const Entity & other) = 0;
-		virtual void draw() const = 0;
+		void draw(Area & area) const;
 
 		inline const Point & getPosition() const { return m_position; }
 		inline unsigned int getStrength() const { return m_strength; }
 		inline unsigned int getInitiative() const { return m_initiative; }
 	protected:
 		void move(unsigned int x, unsigned int y);
+		
+		virtual inline const char * getSymbol() const = 0;
 	private:
 		World & m_world;
 		Point m_position;

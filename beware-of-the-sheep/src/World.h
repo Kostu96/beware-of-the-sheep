@@ -1,4 +1,7 @@
 #pragma once
+#include "Entities/Entity.h"
+#include "Area.h"
+#include <vector>
 
 namespace bots {
 
@@ -9,12 +12,17 @@ namespace bots {
 	class World
 	{
 	public:
-		World(unsigned int sizeX, unsigned int sizeY);
+		World(unsigned int width, unsigned int height);
+		~World();
 
-		inline unsigned int getSizeX() const { return m_sizeX; }
-		inline unsigned int getSizeY() const { return m_sizeY; }
+		void simulate();
+
+		inline unsigned int getWidth() const { return m_height; }
+		inline unsigned int getHeight() const { return m_width; }
 	private:
-		unsigned int m_sizeX, m_sizeY;
+		unsigned int m_width, m_height;
+		Area m_area;
+		std::vector<Entity *> m_entities;
 	};
 
 } // namespace bots
