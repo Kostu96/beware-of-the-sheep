@@ -15,6 +15,8 @@ namespace bots {
 		virtual ~Belladona() = default;
 
 		void collision(const Entity & other) override;
+	protected:
+		inline const char * getSymbol() const override { return "BD"; }
 	private:
 
 	};

@@ -13,6 +13,8 @@ namespace bots {
 	public:
 		Grass(World & world, const Point & position);
 		virtual ~Grass() = default;
+	protected:
+		inline const char * getSymbol() const override { return "GS"; }
 	private:
 
 	};

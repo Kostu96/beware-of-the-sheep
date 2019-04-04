@@ -15,6 +15,8 @@ namespace bots {
 		virtual ~Dandelion() = default;
 
 		void action() override;
+	protected:
+		inline const char * getSymbol() const override { return "DN"; }
 	private:
 
 	};
