@@ -13,6 +13,21 @@ namespace bots {
 	class Entity
 	{
 	public:
+		enum class Kind {
+			Antelope,
+			CyberSheep,
+			Fox,
+			Human,
+			Sheep,
+			Turtle,
+			Wolf,
+			Bellandona,
+			Dandelion,
+			Grass,
+			Guarana,
+			Hogweed
+		};
+
 		Entity(World & world, const Point & position, unsigned int strength = 0, unsigned int initiative = 0);
 		virtual ~Entity() = default;
 
@@ -24,11 +39,12 @@ namespace bots {
 		inline unsigned int getStrength() const { return m_strength; }
 		inline unsigned int getInitiative() const { return m_initiative; }
 	protected:
-		void move(unsigned int x, unsigned int y);
+		void move(int x, int y);
 		
 		virtual inline const char * getSymbol() const = 0;
-	private:
+
 		World & m_world;
+	private:
 		Point m_position;
 		unsigned int m_strength;
 		unsigned int m_initiative;

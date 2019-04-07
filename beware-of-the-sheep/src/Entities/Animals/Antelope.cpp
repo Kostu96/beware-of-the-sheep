@@ -1,4 +1,5 @@
 #include "Antelope.h"
+#include <random>
 
 namespace bots {
 
@@ -9,6 +10,13 @@ namespace bots {
 
 	void Antelope::action()
 	{
+		int xdir = 0, ydir = 0;
+		while (xdir == 0 && ydir == 0) {
+			xdir = rand() % 3 - 1;
+			ydir = rand() % 3 - 1;
+		}
+
+		move(2 * xdir, 2 * ydir);
 	}
 
 	void Antelope::collision(const Entity & other)

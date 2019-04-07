@@ -61,4 +61,9 @@ namespace bots {
 		std::cout << m_arr;
 	}
 
+	bool Area::isFreeSpaceAround() const
+	{
+		return false;
+	}
+
 } // namespace bots

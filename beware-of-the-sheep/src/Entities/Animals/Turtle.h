@@ -14,7 +14,8 @@ namespace bots {
 		Turtle(World & world, const Point & position);
 		virtual ~Turtle() = default;
 
-		// TODO: add action and collision
+		void action() override;
+		void collision(const Entity & other) override;
 	protected:
 		inline const char * getSymbol() const override { return "TT"; }
 	private:

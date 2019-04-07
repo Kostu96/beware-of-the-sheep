@@ -19,12 +19,26 @@ namespace bots {
 
 		inline unsigned int getWidth() const { return m_height; }
 		inline unsigned int getHeight() const { return m_width; }
+
+		void requestSpawn(Entity::Kind kind, Point position);
 	private:
+		struct PendingSpawn
+		{
+			Entity::Kind kind;
+			Point position;
+		};
+
+		void printLegend() const;
+		void printSpacer() const;
 		void print();
+
+		void spawnPending();
+		void spawnEntity(Entity::Kind kind, Point position);
 
 		unsigned int m_width, m_height;
 		Area m_area;
 		std::vector<Entity *> m_entities;
+		std::vector<PendingSpawn> m_pendingSpawns;
 	};
 
 } // namespace bots

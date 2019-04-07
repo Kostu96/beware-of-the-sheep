@@ -15,6 +15,8 @@ namespace bots {
 
 		void clear();
 		void print() const;
+
+		bool isFreeSpaceAround() const;
 	private:
 		unsigned int m_width, m_height;
 		char * m_arr;
