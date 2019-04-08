@@ -1,6 +1,8 @@
 #pragma once
 #include "../Point.h"
 
+// TODO: getClassName for all Entities
+
 namespace bots {
 	
 	class World;
@@ -38,6 +40,9 @@ namespace bots {
 		inline const Point & getPosition() const { return m_position; }
 		inline unsigned int getStrength() const { return m_strength; }
 		inline unsigned int getInitiative() const { return m_initiative; }
+		inline unsigned int getLifeTime() const { return m_lifeTime; }
+
+		inline void incrementLifeTime() { ++m_lifeTime; }
 	protected:
 		void move(int x, int y);
 		
@@ -48,6 +53,7 @@ namespace bots {
 		Point m_position;
 		unsigned int m_strength;
 		unsigned int m_initiative;
+		unsigned int m_lifeTime = 0;
 	};
 
 } // namespace bots

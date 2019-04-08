@@ -21,12 +21,15 @@ namespace bots {
 		inline unsigned int getHeight() const { return m_width; }
 
 		void requestSpawn(Entity::Kind kind, Point position);
+		inline void requestClose() { m_isRunning = false; }
 	private:
 		struct PendingSpawn
 		{
 			Entity::Kind kind;
 			Point position;
 		};
+
+		void tick();
 
 		void printLegend() const;
 		void printSpacer() const;
@@ -35,6 +38,7 @@ namespace bots {
 		void spawnPending();
 		void spawnEntity(Entity::Kind kind, Point position);
 
+		bool m_isRunning = true;
 		unsigned int m_width, m_height;
 		Area m_area;
 		std::vector<Entity *> m_entities;

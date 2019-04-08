@@ -25,23 +25,79 @@ namespace bots {
 
 	void World::simulate()
 	{
-		while (true)
+		while (m_isRunning)
 		{
 			print();
-
-			spawnPending();
-			//std::sort(m_entities.begin(), m_entities.end());
-
-			for (const auto & e : m_entities)
-				e->action();
-
+			tick();
 			std::cin.get();
 		}
 	}
 
+	// TODO: use template?
 	void World::requestSpawn(Entity::Kind kind, Point position)
 	{
-		m_pendingSpawns.push_back({ kind, position });
+		//m_pendingSpawns.push_back({ kind, position });
+		switch (kind) {
+		case Entity::Kind::Antelope:
+			m_entities.push_back(new Antelope(*this, position));
+			break;
+		case Entity::Kind::CyberSheep:
+			m_entities.push_back(new CyberSheep(*this, position));
+			break;
+		case Entity::Kind::Fox:
+			m_entities.push_back(new Fox(*this, position));
+			break;
+		case Entity::Kind::Human:
+			m_entities.push_back(new Human(*this, position));
+			break;
+		case Entity::Kind::Sheep:
+			m_entities.push_back(new Sheep(*this, position));
+			break;
+		case Entity::Kind::Turtle:
+			m_entities.push_back(new Turtle(*this, position));
+			break;
+		case Entity::Kind::Wolf:
+			m_entities.push_back(new Wolf(*this, position));
+			break;
+		case Entity::Kind::Bellandona:
+			m_entities.push_back(new Belladona(*this, position));
+			break;
+		case Entity::Kind::Dandelion:
+			m_entities.push_back(new Dandelion(*this, position));
+			break;
+		case Entity::Kind::Grass:
+			m_entities.push_back(new Grass(*this, position));
+			break;
+		case Entity::Kind::Guarana:
+			m_entities.push_back(new Guarana(*this, position));
+			break;
+		case Entity::Kind::Hogweed:
+			m_entities.push_back(new Hogweed(*this, position));
+			break;
+		}
+	}
+
+	void World::tick()
+	{
+		static std::size_t currentEntity = 0;
+
+		std::sort(m_entities.begin(), m_entities.end(),
+			[](const Entity * a, const Entity * b) -> bool {
+
+			unsigned int aInit = a->getInitiative(), bInit = b->getInitiative();
+
+			if (aInit != bInit)
+				return a->getInitiative() < b->getInitiative();
+
+			return a->getLifeTime() < b->getLifeTime();
+		});
+
+		m_entities[currentEntity]->action();
+
+		// TODO: the rest
+
+		++currentEntity;
+		currentEntity %= m_entities.size();
 	}
 
 	void World::printLegend() const
