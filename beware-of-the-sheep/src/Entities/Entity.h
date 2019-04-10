@@ -41,8 +41,10 @@ namespace bots {
 		inline unsigned int getStrength() const { return m_strength; }
 		inline unsigned int getInitiative() const { return m_initiative; }
 		inline unsigned int getLifeTime() const { return m_lifeTime; }
+		inline bool isAlive() const { return m_isAlive; }
 
 		inline void incrementLifeTime() { ++m_lifeTime; }
+		inline void kill() { m_isAlive = false; }
 	protected:
 		void move(int x, int y);
 		
@@ -54,6 +56,7 @@ namespace bots {
 		unsigned int m_strength;
 		unsigned int m_initiative;
 		unsigned int m_lifeTime = 0;
+		bool m_isAlive = true;
 	};
 
 } // namespace bots

@@ -21,13 +21,11 @@ namespace bots {
 
 	void Entity::move(int x, int y)
 	{
-		long newX = m_position.x + x;
-		newX %= m_world.getWidth();
-		m_position.x = static_cast<unsigned int>(newX);
+		long newX = static_cast<long>(m_position.x) + x;
+		m_position.x = newX < 0 ? newX + m_world.getWidth() : newX % m_world.getWidth();
 
-		long newY = m_position.y + y;
-		newY %= m_world.getHeight();
-		m_position.y = static_cast<unsigned int>(newY);
+		long newY = static_cast<long>(m_position.y) + y;
+		m_position.y = newY < 0 ? newY + m_world.getHeight() : newY % m_world.getHeight();
 	}
 
 } // namespace bots

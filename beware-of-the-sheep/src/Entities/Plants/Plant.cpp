@@ -13,14 +13,12 @@ namespace bots {
 
 	void Plant::action()
 	{
+		Area::NeighboursArray arr{};
+		unsigned int count = m_world.getFreeSpaceAround(getPosition(), arr);
+		
 		int c = rand() % 8;
-		if (c == 0) {
-			int x = 0, y = 0;
-			while (x == 0 && y == 0) {
-				x = rand() % 3 - 1;
-				y = rand() % 3 - 1;
-			}
-			m_world.requestSpawn(Entity::Kind::Grass, { getPosition().x + x, getPosition().y + y });
+		if (c == 0 && count > 0) {
+			m_world.spawnEntity(Entity::Kind::Grass, arr[rand() % count]);
 		}
 	}
 

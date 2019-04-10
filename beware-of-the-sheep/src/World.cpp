@@ -14,6 +14,7 @@ namespace bots {
 	{
 		srand(static_cast<unsigned int>(time(nullptr)));
 
+		spawnEntity(Entity::Kind::Human, { 1, 1 });
 		spawnEntity(Entity::Kind::Grass, { 10, 10 });
 	}
 
@@ -29,14 +30,12 @@ namespace bots {
 		{
 			print();
 			tick();
-			std::cin.get();
 		}
 	}
 
 	// TODO: use template?
-	void World::requestSpawn(Entity::Kind kind, Point position)
+	void World::spawnEntity(Entity::Kind kind, Point position)
 	{
-		//m_pendingSpawns.push_back({ kind, position });
 		switch (kind) {
 		case Entity::Kind::Antelope:
 			m_entities.push_back(new Antelope(*this, position));
@@ -79,8 +78,6 @@ namespace bots {
 
 	void World::tick()
 	{
-		static std::size_t currentEntity = 0;
-
 		std::sort(m_entities.begin(), m_entities.end(),
 			[](const Entity * a, const Entity * b) -> bool {
 
@@ -92,12 +89,12 @@ namespace bots {
 			return a->getLifeTime() < b->getLifeTime();
 		});
 
-		m_entities[currentEntity]->action();
+		std::size_t size = m_entities.size();
+		for (std::size_t i = 0; i < size; ++i)
+			if (m_entities[i]->isAlive())
+				m_entities[i]->action();
 
 		// TODO: the rest
-
-		++currentEntity;
-		currentEntity %= m_entities.size();
 	}
 
 	void World::printLegend() const
@@ -128,56 +125,6 @@ namespace bots {
 			e->draw(m_area);
 		m_area.print();
 		printSpacer();
-	}
-
-	void World::spawnPending()
-	{
-		for (const auto & x : m_pendingSpawns)
-			spawnEntity(x.kind, x.position);
-
-		m_pendingSpawns.clear();
-	}
-
-	void World::spawnEntity(Entity::Kind kind, Point position)
-	{
-		switch (kind) {
-		case Entity::Kind::Antelope:
-			m_entities.push_back(new Antelope(*this, position));
-			break;
-		case Entity::Kind::CyberSheep:
-			m_entities.push_back(new CyberSheep(*this, position));
-			break;
-		case Entity::Kind::Fox:
-			m_entities.push_back(new Fox(*this, position));
-			break;
-		case Entity::Kind::Human:
-			m_entities.push_back(new Human(*this, position));
-			break;
-		case Entity::Kind::Sheep:
-			m_entities.push_back(new Sheep(*this, position));
-			break;
-		case Entity::Kind::Turtle:
-			m_entities.push_back(new Turtle(*this, position));
-			break;
-		case Entity::Kind::Wolf:
-			m_entities.push_back(new Wolf(*this, position));
-			break;
-		case Entity::Kind::Bellandona:
-			m_entities.push_back(new Belladona(*this, position));
-			break;
-		case Entity::Kind::Dandelion:
-			m_entities.push_back(new Dandelion(*this, position));
-			break;
-		case Entity::Kind::Grass:
-			m_entities.push_back(new Grass(*this, position));
-			break;
-		case Entity::Kind::Guarana:
-			m_entities.push_back(new Guarana(*this, position));
-			break;
-		case Entity::Kind::Hogweed:
-			m_entities.push_back(new Hogweed(*this, position));
-			break;
-		}
 	}
 
 } // namepace bots

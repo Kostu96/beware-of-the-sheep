@@ -39,8 +39,9 @@ namespace bots {
 		unsigned int y = position.y;
 		if (x >= 0 && x < m_width && y >= 0 && y < m_height)
 		{
-			m_arr[(2 * m_width + 1) * y + 2 * x] = str[0];
-			m_arr[(2 * m_width + 1) * y + 2 * x + 1] = str[1];
+			unsigned int index = getInnerIndex(position);
+			m_arr[index] = str[0];
+			m_arr[index + 1] = str[1];
 		}
 		else
 			throw std::exception("Wrong position!");
@@ -61,9 +62,34 @@ namespace bots {
 		std::cout << m_arr;
 	}
 
-	bool Area::isFreeSpaceAround() const
+	unsigned int Area::getFreeSpaceAround(Point position, NeighboursArray & arr) const
 	{
-		return false;
+		unsigned int count = 0;
+
+		long xpos = static_cast<long>(position.x), ypos = static_cast<long>(position.y);
+
+		unsigned int nx = (xpos - 1 < 0 ? xpos - 1 + m_width : (xpos - 1) % m_width);
+		if (m_arr[getInnerIndex({ nx, position.y })] == ' ')
+			arr[count++] = { nx, position.y };
+
+		nx = (xpos + 1 < 0 ? xpos + 1 + m_width : (xpos + 1) % m_width);
+		if (m_arr[getInnerIndex({ nx, position.y })] == ' ')
+			arr[count++] = { nx, position.y };
+
+		unsigned int ny = (ypos - 1 < 0 ? ypos - 1 + m_height : (ypos - 1) % m_height);
+		if (m_arr[getInnerIndex({ position.x, ny })] == ' ')
+			arr[count++] = { position.x, ny };
+
+		ny = (ypos + 1 < 0 ? ypos + 1 + m_height : (ypos + 1) % m_height);
+		if (m_arr[getInnerIndex({ position.x, ny })] == ' ')
+			arr[count++] = { position.x, ny };
+
+		return count;
+	}
+
+	unsigned int Area::getInnerIndex(Point position) const
+	{
+		return (2 * m_width + 1) * position.y + 2 * position.x;
 	}
 
 } // namespace bots

@@ -19,8 +19,9 @@ namespace bots {
 
 		inline unsigned int getWidth() const { return m_height; }
 		inline unsigned int getHeight() const { return m_width; }
+		inline unsigned int getFreeSpaceAround(Point position, Area::NeighboursArray & arr) const { return m_area.getFreeSpaceAround(position, arr); }
 
-		void requestSpawn(Entity::Kind kind, Point position);
+		void spawnEntity(Entity::Kind kind, Point position);
 		inline void requestClose() { m_isRunning = false; }
 	private:
 		struct PendingSpawn
@@ -34,9 +35,6 @@ namespace bots {
 		void printLegend() const;
 		void printSpacer() const;
 		void print();
-
-		void spawnPending();
-		void spawnEntity(Entity::Kind kind, Point position);
 
 		bool m_isRunning = true;
 		unsigned int m_width, m_height;

@@ -14,7 +14,8 @@ namespace bots {
 		Human(World & world, const Point & position);
 		virtual ~Human() = default;
 
-		// TODO: add action and collision
+		void action() override;
+		// TODO: add collision
 	protected:
 		inline const char * getSymbol() const override { return "HM"; }
 	private:

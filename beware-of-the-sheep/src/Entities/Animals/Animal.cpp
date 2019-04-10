@@ -9,13 +9,14 @@ namespace bots {
 
 	void Animal::action()
 	{
-		int xdir = 0, ydir = 0;
-		while (xdir == 0 && ydir == 0) {
-			xdir = rand() % 3 - 1;
-			ydir = rand() % 3 - 1;
-		}
-
-		move(xdir, ydir);
+		int vorh, norp;
+		vorh = rand() % 2;
+		norp = rand() % 2;
+		
+		if (vorh)
+			move(0, norp ? -1 : 1);
+		else
+			move(norp ? -1 : 1, 0);
 	}
 
 	void Animal::collision(const Entity & other)
