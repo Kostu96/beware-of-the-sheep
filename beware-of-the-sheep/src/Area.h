@@ -1,6 +1,6 @@
 #pragma once
+#include "pch.h"
 #include "Point.h"
-#include <array>
 
 namespace bots {
 

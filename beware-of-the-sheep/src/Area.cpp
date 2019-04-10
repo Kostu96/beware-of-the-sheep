@@ -1,7 +1,5 @@
+#include "pch.h"
 #include "Area.h"
-#include <exception>
-#include <cstring>
-#include <iostream>
 
 namespace bots {
 
