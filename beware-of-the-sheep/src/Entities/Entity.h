@@ -49,6 +49,7 @@ namespace bots {
 		void move(int x, int y);
 		
 		virtual inline const char * getSymbol() const = 0;
+		virtual inline Kind getKind() const = 0;
 
 		World & m_world;
 	private:

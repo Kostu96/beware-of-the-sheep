@@ -19,7 +19,7 @@ namespace bots {
 			move(norp ? -1 : 1, 0);
 	}
 
-	void Animal::collision(const Entity & other)
+	void Animal::collision(const Entity & /*other*/)
 	{
 	}
 

@@ -15,6 +15,7 @@ namespace bots {
 		virtual ~Grass() = default;
 	protected:
 		inline const char * getSymbol() const override { return "GS"; }
+		inline Kind getKind() const override { return Kind::Grass; }
 	private:
 
 	};

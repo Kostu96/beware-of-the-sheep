@@ -17,6 +17,7 @@ namespace bots {
 		void collision(const Entity & other) override;
 	protected:
 		inline const char * getSymbol() const override { return "BD"; }
+		inline Kind getKind() const override { return Kind::Bellandona; }
 	private:
 
 	};

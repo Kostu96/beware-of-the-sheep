@@ -15,6 +15,7 @@ namespace bots {
 		virtual ~Wolf() = default;
 	protected:
 		inline const char * getSymbol() const override { return "WF"; }
+		inline Kind getKind() const override { return Kind::Wolf; }
 	private:
 
 	};

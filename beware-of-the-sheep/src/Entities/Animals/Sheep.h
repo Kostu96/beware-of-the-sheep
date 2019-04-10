@@ -15,6 +15,7 @@ namespace bots {
 		virtual ~Sheep() = default;
 	protected:
 		inline const char * getSymbol() const override { return "SP"; }
+		inline Kind getKind() const override { return Kind::Sheep; }
 	private:
 
 	};

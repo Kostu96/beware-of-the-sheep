@@ -15,7 +15,18 @@ namespace bots {
 		srand(static_cast<unsigned int>(time(nullptr)));
 
 		spawnEntity(Entity::Kind::Human, { 1, 1 });
-		spawnEntity(Entity::Kind::Grass, { 10, 10 });
+		//spawnEntity(Entity::Kind::CyberSheep, { 15, 15 });
+
+		spawnEntity(Entity::Kind::Antelope, { 3, 3 });
+		spawnEntity(Entity::Kind::Bellandona, { 5, 5 });
+		spawnEntity(Entity::Kind::Dandelion, { 7, 7 });
+		spawnEntity(Entity::Kind::Fox, { 9, 9 });
+		spawnEntity(Entity::Kind::Grass, { 11, 11 });
+		spawnEntity(Entity::Kind::Guarana, { 13, 13 });
+		spawnEntity(Entity::Kind::Hogweed, { 15, 15 });
+		spawnEntity(Entity::Kind::Sheep, { 17, 17 });
+		spawnEntity(Entity::Kind::Turtle, { 19, 19 });
+		spawnEntity(Entity::Kind::Wolf, { 21, 21 });
 	}
 
 	World::~World()
