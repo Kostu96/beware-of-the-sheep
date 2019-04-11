@@ -7,8 +7,9 @@ namespace bots {
 		Plant(world, position, 99)
 	{}
 
-	void Belladona::collision(const Entity & other)
+	void Belladona::collision(Entity & other)
 	{
+		other.kill();
 	}
 
 } // namespace bots

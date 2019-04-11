@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Animal.h"
+#include "Entities/Plants/Plant.h"
 
 namespace bots {
 
@@ -19,8 +20,11 @@ namespace bots {
 			move(norp ? -1 : 1, 0);
 	}
 
-	void Animal::collision(const Entity & /*other*/)
+	void Animal::collision(Entity & other)
 	{
+		if (dynamic_cast<Plant *>(&other)) {
+			other.kill();
+		}
 	}
 
 } // namespace bots

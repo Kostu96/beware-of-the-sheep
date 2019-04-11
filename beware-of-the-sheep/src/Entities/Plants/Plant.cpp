@@ -13,7 +13,7 @@ namespace bots {
 		Area::NeighboursArray arr{};
 		unsigned int count = m_world.getFreeSpaceAround(getPosition(), arr);
 		
-		int c = rand() % 20;
+		int c = rand() % 25;
 		if (c == 0 && count > 0) {
 			m_world.spawnEntity(getKind(), arr[rand() % count]);
 		}

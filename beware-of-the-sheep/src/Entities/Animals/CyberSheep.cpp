@@ -11,8 +11,9 @@ namespace bots {
 	{
 	}
 
-	void CyberSheep::collision(const Entity & other)
+	void CyberSheep::collision(Entity & other)
 	{
+		Animal::collision(other);
 	}
 
 } // namespace bots

@@ -14,7 +14,7 @@ namespace bots {
 		Guarana(World & world, const Point & position);
 		virtual ~Guarana() = default;
 
-		void collision(const Entity & other) override;
+		void collision(Entity & other) override;
 	protected:
 		inline const char * getSymbol() const override { return "GA"; }
 		inline Kind getKind() const override { return Kind::Guarana; }

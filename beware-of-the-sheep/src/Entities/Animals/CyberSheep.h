@@ -15,7 +15,7 @@ namespace bots {
 		virtual ~CyberSheep() = default;
 
 		void action() override;
-		void collision(const Entity & other) override;
+		void collision(Entity & other) override;
 	protected:
 		inline const char * getSymbol() const override { return "CP"; }
 		inline Kind getKind() const override { return Kind::CyberSheep; }

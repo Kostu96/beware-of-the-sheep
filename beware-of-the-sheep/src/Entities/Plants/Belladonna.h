@@ -14,7 +14,7 @@ namespace bots {
 		Belladona(World & world, const Point & position);
 		virtual ~Belladona() = default;
 
-		void collision(const Entity & other) override;
+		void collision(Entity & other) override;
 	protected:
 		inline const char * getSymbol() const override { return "BD"; }
 		inline Kind getKind() const override { return Kind::Bellandona; }

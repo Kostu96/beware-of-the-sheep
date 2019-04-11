@@ -14,8 +14,9 @@ namespace bots {
 			Animal::action();
 	}
 
-	void Turtle::collision(const Entity & other)
+	void Turtle::collision(Entity & other)
 	{
+		Animal::collision(other);
 	}
 
 } // namespace bots

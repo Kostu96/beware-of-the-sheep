@@ -19,8 +19,10 @@ namespace bots {
 		move(2 * xdir, 2 * ydir);
 	}
 
-	void Antelope::collision(const Entity & other)
+	void Antelope::collision(Entity & other)
 	{
+		Animal::collision(other);
+		// TODO: rest
 	}
 
 } // namespace bots

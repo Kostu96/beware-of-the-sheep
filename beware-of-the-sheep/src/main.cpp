@@ -8,7 +8,12 @@ int main()
 	std::cin >> width >> height;
 
 	bots::World world(width, height);
-	world.simulate();
+	
+	while (true)
+	{
+		world.print();
+		world.tick();
+	}
 
 	return 0;
 }

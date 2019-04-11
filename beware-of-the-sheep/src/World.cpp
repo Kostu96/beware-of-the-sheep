@@ -33,16 +33,38 @@ namespace bots {
 			delete e;
 	}
 
-	void World::simulate()
+	Entity * World::getEntityAt(unsigned int x, unsigned int y)
 	{
-		while (m_isRunning)
-		{
-			print();
-			tick();
-		}
+		auto found = std::find_if(m_entities.begin(), m_entities.end(),
+			[x, y](const Entity * e) -> bool {
+			return e->getPosition().x == x && e->getPosition().y == y;
+		});
+
+		return (found != m_entities.end() ? *found : nullptr);
 	}
 
-	// TODO: use template?
+	void World::removeKilledEntites()
+	{
+		std::remove_if(m_entities.begin(), m_entities.end(),
+			[](const Entity * e) -> bool {
+			return !e->isAlive();
+		});
+	}
+
+	void World::sortEntities()
+	{
+		std::sort(m_entities.begin(), m_entities.end(),
+			[](const Entity * a, const Entity * b) -> bool {
+
+			unsigned int aInit = a->getInitiative(), bInit = b->getInitiative();
+
+			if (aInit != bInit)
+				return a->getInitiative() < b->getInitiative();
+
+			return a->getLifeTime() < b->getLifeTime();
+		});
+	}
+
 	void World::spawnEntity(Entity::Kind kind, Point position)
 	{
 		switch (kind) {
@@ -87,23 +109,21 @@ namespace bots {
 
 	void World::tick()
 	{
-		std::sort(m_entities.begin(), m_entities.end(),
-			[](const Entity * a, const Entity * b) -> bool {
-
-			unsigned int aInit = a->getInitiative(), bInit = b->getInitiative();
-
-			if (aInit != bInit)
-				return a->getInitiative() < b->getInitiative();
-
-			return a->getLifeTime() < b->getLifeTime();
-		});
+		removeKilledEntites();
+		sortEntities();
 
 		std::size_t size = m_entities.size();
 		for (std::size_t i = 0; i < size; ++i)
-			if (m_entities[i]->isAlive())
+			if (m_entities[i]->isAlive()) {
 				m_entities[i]->action();
-
-		// TODO: the rest
+				const Point & position = m_entities[i]->getPosition();
+				Entity * e = getEntityAt(position.x, position.y);
+				if (e) {
+					m_entities[i]->collision(*e);
+					e->collision(*m_entities[i]);
+				}
+				m_entities[i]->incrementLifeTime();
+			}
 	}
 
 	void World::printLegend() const
@@ -133,7 +153,6 @@ namespace bots {
 		for (const auto & e : m_entities)
 			e->draw(m_area);
 		m_area.print();
-		printSpacer();
 	}
 
 } // namepace bots

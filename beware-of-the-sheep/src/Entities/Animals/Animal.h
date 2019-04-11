@@ -15,7 +15,7 @@ namespace bots {
 		virtual ~Animal() = default;
 
 		void action() override;
-		void collision(const Entity & other) override;
+		void collision(Entity & other) override;
 	private:
 
 	};

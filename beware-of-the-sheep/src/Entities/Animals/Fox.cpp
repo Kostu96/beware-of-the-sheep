@@ -9,6 +9,8 @@ namespace bots {
 
 	void Fox::action()
 	{
+		// temp TODO: proper
+		Animal::action();
 	}
 
 } // namespace bots

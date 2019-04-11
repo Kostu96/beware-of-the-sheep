@@ -32,7 +32,7 @@ namespace bots {
 		virtual ~Entity() = default;
 
 		virtual void action() = 0;
-		virtual void collision(const Entity & other) = 0;
+		virtual void collision(Entity & other) = 0;
 		void draw(Area & area) const;
 
 		inline const Point & getPosition() const { return m_position; }
@@ -41,6 +41,7 @@ namespace bots {
 		inline unsigned int getLifeTime() const { return m_lifeTime; }
 		inline bool isAlive() const { return m_isAlive; }
 
+		inline void addStrength(unsigned int x) { m_strength += x; }
 		inline void incrementLifeTime() { ++m_lifeTime; }
 		inline void kill() { m_isAlive = false; }
 	protected:

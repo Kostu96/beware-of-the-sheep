@@ -7,8 +7,9 @@ namespace bots {
 		Plant(world, position)
 	{}
 
-	void Guarana::collision(const Entity & other)
+	void Guarana::collision(Entity & other)
 	{
+		other.addStrength(3);
 	}
 
 } // namespace bots

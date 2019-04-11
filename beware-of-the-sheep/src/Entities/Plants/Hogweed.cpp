@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Hogweed.h"
+#include "Entities/Animals/CyberSheep.h"
 
 namespace bots {
 
@@ -11,8 +12,10 @@ namespace bots {
 	{
 	}
 
-	void Hogweed::collision(const Entity & other)
+	void Hogweed::collision(Entity & other)
 	{
+		if (!dynamic_cast<CyberSheep *>(&other))
+			other.kill();
 	}
 
 } // namespace bots

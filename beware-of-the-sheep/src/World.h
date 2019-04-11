@@ -15,32 +15,24 @@ namespace bots {
 		World(unsigned int width, unsigned int height);
 		~World();
 
-		void simulate();
+		void tick();
+		void print();
 
 		inline unsigned int getWidth() const { return m_height; }
 		inline unsigned int getHeight() const { return m_width; }
 		inline unsigned int getFreeSpaceAround(Point position, Area::NeighboursArray & arr) const { return m_area.getFreeSpaceAround(position, arr); }
-
 		void spawnEntity(Entity::Kind kind, Point position);
-		inline void requestClose() { m_isRunning = false; }
 	private:
-		struct PendingSpawn
-		{
-			Entity::Kind kind;
-			Point position;
-		};
-
-		void tick();
+		Entity * getEntityAt(unsigned int x, unsigned int y);
+		void removeKilledEntites();
+		void sortEntities();
 
 		void printLegend() const;
 		void printSpacer() const;
-		void print();
 
-		bool m_isRunning = true;
 		unsigned int m_width, m_height;
 		Area m_area;
 		std::vector<Entity *> m_entities;
-		std::vector<PendingSpawn> m_pendingSpawns;
 	};
 
 } // namespace bots
