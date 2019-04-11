@@ -1,7 +1,7 @@
 #pragma once
+#include "pch.h"
 #include "Entities/Entity.h"
 #include "Area.h"
-#include <vector>
 
 namespace bots {
 

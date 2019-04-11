@@ -1,10 +1,8 @@
+#include "pch.h"
 #include "World.h"
 #include "Entities/Animals.h"
 #include "Entities/Plants.h"
-#include <iostream>
-#include <algorithm>
-#include <random>
-#include <ctime>
+
 
 namespace bots {
 

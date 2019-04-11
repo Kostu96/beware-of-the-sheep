@@ -1,5 +1,6 @@
+#include "pch.h"
 #include "Human.h"
-#include <conio.h>
+
 
 namespace bots {
 

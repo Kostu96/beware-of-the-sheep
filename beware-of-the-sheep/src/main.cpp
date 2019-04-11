@@ -1,5 +1,5 @@
+#include "pch.h"
 #include "World.h"
-#include <iostream>
 
 int main()
 {
@@ -12,3 +12,5 @@ int main()
 
 	return 0;
 }
+
+// TODO: move main loop into main

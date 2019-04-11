@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "Entity.h"
-#include "../World.h"
-#include "../Area.h"
+#include "World.h"
+#include "Area.h"
 
 namespace bots {
 

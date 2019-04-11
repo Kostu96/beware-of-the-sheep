@@ -1,9 +1,16 @@
 #pragma once
+
+// console IO
 #include <iostream>
-#include <cstring>
-#include <exception>
-#include <random>
+#include <conio.h>
 
+// STL containers:
 #include <array>
+#include <vector>
 
-// TODO: finich pch.h
+// other:
+#include <ctime>
+#include <random>
+#include <cstring>
+#include <algorithm>
+#include <exception>
