@@ -19,6 +19,7 @@ namespace bots {
 	protected:
 		inline const char * getSymbol() const override { return "CP"; }
 		inline Kind getKind() const override { return Kind::CyberSheep; }
+		inline const char * getClassName() const override { return "CyberSheep"; }
 	private:
 
 	};

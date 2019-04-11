@@ -18,6 +18,7 @@ namespace bots {
 	protected:
 		inline const char * getSymbol() const override { return "BD"; }
 		inline Kind getKind() const override { return Kind::Bellandona; }
+		inline const char * getClassName() const override { return "Belladonna"; }
 	private:
 
 	};

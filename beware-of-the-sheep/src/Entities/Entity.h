@@ -1,8 +1,6 @@
 #pragma once
 #include "Point.h"
 
-// TODO: getClassName for all Entities
-
 namespace bots {
 	
 	class World;
@@ -50,6 +48,7 @@ namespace bots {
 		
 		virtual inline const char * getSymbol() const = 0;
 		virtual inline Kind getKind() const = 0;
+		virtual inline const char * getClassName() const = 0;
 
 		World & m_world;
 	private:
