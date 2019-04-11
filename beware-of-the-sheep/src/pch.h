@@ -14,3 +14,4 @@
 #include <cstring>
 #include <algorithm>
 #include <exception>
+#include <memory>

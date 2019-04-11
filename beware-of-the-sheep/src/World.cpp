@@ -27,16 +27,10 @@ namespace bots {
 		spawnEntity(Entity::Kind::Wolf, { 21, 21 });
 	}
 
-	World::~World()
-	{
-		for (auto & e : m_entities)
-			delete e;
-	}
-
-	Entity * World::getEntityAt(unsigned int x, unsigned int y)
+	Entity::Ptr World::getEntityAt(unsigned int x, unsigned int y)
 	{
 		auto found = std::find_if(m_entities.begin(), m_entities.end(),
-			[x, y](const Entity * e) -> bool {
+			[x, y](const Entity::Ptr e) -> bool {
 			return e->getPosition().x == x && e->getPosition().y == y;
 		});
 
@@ -45,16 +39,22 @@ namespace bots {
 
 	void World::removeKilledEntites()
 	{
-		std::remove_if(m_entities.begin(), m_entities.end(),
-			[](const Entity * e) -> bool {
-			return !e->isAlive();
-		});
+		m_entities.erase(
+			std::remove_if(
+				m_entities.begin(),
+				m_entities.end(),
+				[](const Entity::Ptr e) -> bool {
+					return !e->isAlive();
+				}
+			),
+			m_entities.end()
+		);
 	}
 
 	void World::sortEntities()
 	{
 		std::sort(m_entities.begin(), m_entities.end(),
-			[](const Entity * a, const Entity * b) -> bool {
+			[](const Entity::Ptr a, const Entity::Ptr b) -> bool {
 
 			unsigned int aInit = a->getInitiative(), bInit = b->getInitiative();
 
@@ -69,40 +69,40 @@ namespace bots {
 	{
 		switch (kind) {
 		case Entity::Kind::Antelope:
-			m_entities.push_back(new Antelope(*this, position));
+			m_entities.push_back(std::make_shared<Antelope>(*this, position));
 			break;
 		case Entity::Kind::CyberSheep:
-			m_entities.push_back(new CyberSheep(*this, position));
+			m_entities.push_back(std::make_shared <CyberSheep>(*this, position));
 			break;
 		case Entity::Kind::Fox:
-			m_entities.push_back(new Fox(*this, position));
+			m_entities.push_back(std::make_shared<Fox>(*this, position));
 			break;
 		case Entity::Kind::Human:
-			m_entities.push_back(new Human(*this, position));
+			m_entities.push_back(std::make_shared<Human>(*this, position));
 			break;
 		case Entity::Kind::Sheep:
-			m_entities.push_back(new Sheep(*this, position));
+			m_entities.push_back(std::make_shared<Sheep>(*this, position));
 			break;
 		case Entity::Kind::Turtle:
-			m_entities.push_back(new Turtle(*this, position));
+			m_entities.push_back(std::make_shared<Turtle>(*this, position));
 			break;
 		case Entity::Kind::Wolf:
-			m_entities.push_back(new Wolf(*this, position));
+			m_entities.push_back(std::make_shared<Wolf>(*this, position));
 			break;
 		case Entity::Kind::Bellandona:
-			m_entities.push_back(new Belladona(*this, position));
+			m_entities.push_back(std::make_shared<Belladona>(*this, position));
 			break;
 		case Entity::Kind::Dandelion:
-			m_entities.push_back(new Dandelion(*this, position));
+			m_entities.push_back(std::make_shared<Dandelion>(*this, position));
 			break;
 		case Entity::Kind::Grass:
-			m_entities.push_back(new Grass(*this, position));
+			m_entities.push_back(std::make_shared<Grass>(*this, position));
 			break;
 		case Entity::Kind::Guarana:
-			m_entities.push_back(new Guarana(*this, position));
+			m_entities.push_back(std::make_shared<Guarana>(*this, position));
 			break;
 		case Entity::Kind::Hogweed:
-			m_entities.push_back(new Hogweed(*this, position));
+			m_entities.push_back(std::make_shared<Hogweed>(*this, position));
 			break;
 		}
 	}
@@ -117,7 +117,7 @@ namespace bots {
 			if (m_entities[i]->isAlive()) {
 				m_entities[i]->action();
 				const Point & position = m_entities[i]->getPosition();
-				Entity * e = getEntityAt(position.x, position.y);
+				auto e = getEntityAt(position.x, position.y);
 				if (e) {
 					m_entities[i]->collision(*e);
 					e->collision(*m_entities[i]);

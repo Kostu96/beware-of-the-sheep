@@ -10,13 +10,14 @@ namespace bots {
 
 	void Antelope::action()
 	{
-		int xdir = 0, ydir = 0;
-		while (xdir == 0 && ydir == 0) {
-			xdir = rand() % 3 - 1;
-			ydir = rand() % 3 - 1;
-		}
+		int vorh, norp;
+		vorh = rand() % 2;
+		norp = rand() % 2;
 
-		move(2 * xdir, 2 * ydir);
+		if (vorh)
+			move(0, norp ? -2 : 2);
+		else
+			move(norp ? -2 : 2, 0);
 	}
 
 	void Antelope::collision(Entity & other)

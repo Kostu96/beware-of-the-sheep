@@ -13,7 +13,6 @@ namespace bots {
 	{
 	public:
 		World(unsigned int width, unsigned int height);
-		~World();
 
 		void tick();
 		void print();
@@ -23,7 +22,7 @@ namespace bots {
 		inline unsigned int getFreeSpaceAround(Point position, Area::NeighboursArray & arr) const { return m_area.getFreeSpaceAround(position, arr); }
 		void spawnEntity(Entity::Kind kind, Point position);
 	private:
-		Entity * getEntityAt(unsigned int x, unsigned int y);
+		Entity::Ptr getEntityAt(unsigned int x, unsigned int y);
 		void removeKilledEntites();
 		void sortEntities();
 
@@ -32,7 +31,7 @@ namespace bots {
 
 		unsigned int m_width, m_height;
 		Area m_area;
-		std::vector<Entity *> m_entities;
+		std::vector<Entity::Ptr> m_entities;
 	};
 
 } // namespace bots

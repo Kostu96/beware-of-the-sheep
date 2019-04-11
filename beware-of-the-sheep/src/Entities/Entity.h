@@ -13,6 +13,8 @@ namespace bots {
 	class Entity
 	{
 	public:
+		using Ptr = std::shared_ptr<Entity>;
+
 		enum class Kind {
 			Antelope,
 			CyberSheep,
