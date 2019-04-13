@@ -21,6 +21,7 @@ namespace bots {
 		inline unsigned int getHeight() const { return m_width; }
 		inline unsigned int getFreeSpaceAround(Point position, Area::NeighboursArray & arr) const { return m_area.getFreeSpaceAround(position, arr); }
 		void spawnEntity(Entity::Kind kind, Point position);
+		void addMessage(std::string && message) { m_messages.emplace_back(std::move(message)); }
 	private:
 		Entity::Ptr getEntityAt(unsigned int x, unsigned int y);
 		void removeKilledEntites();
@@ -28,10 +29,12 @@ namespace bots {
 
 		void printLegend() const;
 		void printSpacer() const;
+		void printMessages();
 
 		unsigned int m_width, m_height;
 		Area m_area;
 		std::vector<Entity::Ptr> m_entities;
+		std::list<std::string> m_messages;
 	};
 
 } // namespace bots

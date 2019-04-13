@@ -13,8 +13,8 @@ namespace bots {
 		Area(const Area &) = delete;
 		~Area();
 
-		void put(unsigned int x, unsigned int y, const char * str);
-		void put(const Point & position, const char * str);
+		void put(unsigned int x, unsigned int y, const std::string & str);
+		void put(const Point & position, const std::string & str);
 
 		void clear();
 		void print() const;

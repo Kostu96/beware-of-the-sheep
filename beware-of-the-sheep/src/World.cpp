@@ -105,6 +105,8 @@ namespace bots {
 			m_entities.push_back(std::make_shared<Hogweed>(*this, position));
 			break;
 		}
+		std::string message = m_entities[m_entities.size() - 1]->getClassName() + " spawned at " + position.to_string();
+		addMessage(std::move(message));
 	}
 
 	void World::tick()
@@ -141,6 +143,13 @@ namespace bots {
 		std::cout << "\n=================================================\n";
 	}
 
+	void World::printMessages()
+	{
+		for (const auto & m : m_messages)
+			std::cout << m << '\n';
+		m_messages.clear();
+	}
+
 	void World::print()
 	{
 		std::system("cls");
@@ -153,6 +162,9 @@ namespace bots {
 		for (const auto & e : m_entities)
 			e->draw(m_area);
 		m_area.print();
+		std::cout << '\n';
+
+		printMessages();
 	}
 
 } // namepace bots

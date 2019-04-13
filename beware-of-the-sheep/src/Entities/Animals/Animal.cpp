@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Animal.h"
 #include "Entities/Plants/Plant.h"
+#include "World.h"
 
 namespace bots {
 
@@ -24,6 +25,8 @@ namespace bots {
 	{
 		if (dynamic_cast<Plant *>(&other)) {
 			other.kill();
+			std::string message = other.getClassName() + " was eaten by " + getClassName();
+			m_world.addMessage(std::move(message));
 		}
 	}
 

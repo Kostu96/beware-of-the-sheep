@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Belladonna.h"
+#include "World.h"
+#include "Entities/Animals/Animal.h"
 
 namespace bots {
 
@@ -9,7 +11,11 @@ namespace bots {
 
 	void Belladona::collision(Entity & other)
 	{
-		other.kill();
+		if (dynamic_cast<Animal *>(&other)) {
+			other.kill();
+			std::string message = other.getClassName() + " was slain by " + getClassName();
+			m_world.addMessage(std::move(message));
+		}
 	}
 
 } // namespace bots

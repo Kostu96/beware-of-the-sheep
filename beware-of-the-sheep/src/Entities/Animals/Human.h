@@ -17,9 +17,9 @@ namespace bots {
 		void action() override;
 		// TODO: add collision
 	protected:
-		inline const char * getSymbol() const override { return "HM"; }
+		inline std::string getSymbol() const override { return "HM"; }
 		inline Kind getKind() const override { return Kind::Human; }
-		inline const char * getClassName() const override { return "Human"; }
+		inline std::string getClassName() const override { return "Human"; }
 	private:
 
 	};

@@ -14,9 +14,9 @@ namespace bots {
 		Sheep(World & world, const Point & position);
 		virtual ~Sheep() = default;
 	protected:
-		inline const char * getSymbol() const override { return "SP"; }
+		inline std::string getSymbol() const override { return "SP"; }
 		inline Kind getKind() const override { return Kind::Sheep; }
-		inline const char * getClassName() const override { return "Sheep"; }
+		inline std::string getClassName() const override { return "Sheep"; }
 	private:
 
 	};

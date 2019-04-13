@@ -14,9 +14,9 @@ namespace bots {
 		Grass(World & world, const Point & position);
 		virtual ~Grass() = default;
 	protected:
-		inline const char * getSymbol() const override { return "GS"; }
+		inline std::string getSymbol() const override { return "GS"; }
 		inline Kind getKind() const override { return Kind::Grass; }
-		inline const char * getClassName() const override { return "Grass"; }
+		inline std::string getClassName() const override { return "Grass"; }
 	private:
 
 	};
