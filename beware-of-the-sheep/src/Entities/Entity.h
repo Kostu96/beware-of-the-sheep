@@ -53,9 +53,11 @@ namespace bots {
 		inline void kill() { m_isAlive = false; }
 	protected:
 		void move(int x, int y);
+		void moveToPrevPosition();
 
 		World & m_world;
 	private:
+		Point m_prevPosition;
 		Point m_position;
 		unsigned int m_strength;
 		unsigned int m_initiative;

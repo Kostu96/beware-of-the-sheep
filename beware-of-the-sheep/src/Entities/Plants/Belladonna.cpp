@@ -12,7 +12,8 @@ namespace bots {
 	void Belladona::collision(Entity & other)
 	{
 		if (dynamic_cast<Animal *>(&other)) {
-			other.kill();
+			if (other.getStrength() < getStrength())
+				other.kill();
 			std::string message = other.getClassName() + " was slain by " + getClassName();
 			m_world.addMessage(std::move(message));
 		}

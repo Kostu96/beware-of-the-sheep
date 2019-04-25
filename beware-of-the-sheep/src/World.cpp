@@ -13,11 +13,9 @@ namespace bots {
 		srand(static_cast<unsigned int>(time(nullptr)));
 
 		spawnEntity(Entity::Kind::Human, { 1, 1 });
-		//spawnEntity(Entity::Kind::CyberSheep, { 15, 15 });
-
 		spawnEntity(Entity::Kind::Antelope, { 3, 3 });
-		spawnEntity(Entity::Kind::Bellandona, { 5, 5 });
-		spawnEntity(Entity::Kind::Dandelion, { 7, 7 });
+		spawnEntity(Entity::Kind::Bellandona, { 9, 5 });
+		spawnEntity(Entity::Kind::Dandelion, { 3, 7 });
 		spawnEntity(Entity::Kind::Fox, { 9, 9 });
 		spawnEntity(Entity::Kind::Grass, { 11, 11 });
 		spawnEntity(Entity::Kind::Guarana, { 13, 13 });
@@ -118,12 +116,12 @@ namespace bots {
 		for (std::size_t i = 0; i < size; ++i)
 			if (m_entities[i]->isAlive()) {
 				m_entities[i]->action();
+
 				const Point & position = m_entities[i]->getPosition();
 				auto e = getEntityAt(position.x, position.y);
-				if (e) {
+				if (e && e != m_entities[i])
 					m_entities[i]->collision(*e);
-					e->collision(*m_entities[i]);
-				}
+
 				m_entities[i]->incrementLifeTime();
 			}
 	}
@@ -153,7 +151,7 @@ namespace bots {
 	void World::print()
 	{
 		std::system("cls");
-		std::cout << "Kontanty Misiak 175524\n";
+		std::cout << "Kontanty Misiak 175524";
 		printSpacer();
 		printLegend();
 		printSpacer();

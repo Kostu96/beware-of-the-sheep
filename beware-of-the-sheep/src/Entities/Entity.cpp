@@ -7,6 +7,7 @@ namespace bots {
 
 	Entity::Entity(World & world, const Point & position, unsigned int strength, unsigned int initiative) :
 		m_world(world),
+		m_prevPosition(position),
 		m_position(position),
 		m_strength(strength),
 		m_initiative(initiative)
@@ -22,11 +23,18 @@ namespace bots {
 
 	void Entity::move(int x, int y)
 	{
+		m_prevPosition = m_position;
+
 		long newX = static_cast<long>(m_position.x) + x;
 		m_position.x = newX < 0 ? newX + m_world.getWidth() : newX % m_world.getWidth();
 
 		long newY = static_cast<long>(m_position.y) + y;
 		m_position.y = newY < 0 ? newY + m_world.getHeight() : newY % m_world.getHeight();
+	}
+
+	void Entity::moveToPrevPosition()
+	{
+		move(m_prevPosition.x, m_prevPosition.y);
 	}
 
 } // namespace bots

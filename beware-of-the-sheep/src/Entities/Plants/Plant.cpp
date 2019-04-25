@@ -14,10 +14,8 @@ namespace bots {
 		unsigned int count = m_world.getFreeSpaceAround(getPosition(), arr);
 		
 		int c = rand() % 40;
-		if (c == 0 && count > 0) {
+		if (c == 0 && count > 0)
 			m_world.spawnEntity(getKind(), arr[rand() % count]);
-
-		}
 	}
 
 } // namespace bots
