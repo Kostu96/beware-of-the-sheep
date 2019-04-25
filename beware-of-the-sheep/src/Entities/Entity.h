@@ -51,7 +51,7 @@ namespace bots {
 		inline void addStrength(unsigned int x) { m_strength += x; }
 		inline void incrementLifeTime() { ++m_lifeTime; }
 		inline void kill() { m_isAlive = false; }
-		virtual bool dodgedAttack(unsigned int strength) const { return false; }
+		virtual bool dodgedAttack(unsigned int /*strength*/) const { return false; }
 	protected:
 		void move(int x, int y);
 		void moveToPrevPosition();

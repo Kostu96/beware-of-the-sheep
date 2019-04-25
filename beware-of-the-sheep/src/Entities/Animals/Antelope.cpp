@@ -29,8 +29,12 @@ namespace bots {
 		else {
 			Area::NeighboursArray arr{};
 			unsigned int count = m_world.getFreeSpaceAround(getPosition(), arr);
-			Point d = arr[rand() % count];
-			move(d.x - getPosition().x, d.y - getPosition().y);
+			if (count > 0) {
+				Point d = arr[rand() % count];
+				move(d.x - getPosition().x, d.y - getPosition().y);
+			}
+			else
+				Animal::collision(other);
 		}
 	}
 

@@ -38,9 +38,10 @@ namespace bots {
 			if (count > 0)
 				m_world.spawnEntity(getKind(), arr[rand() % count]);
 		}
-		else if (other.dodgedAttack())
+		else if (other.dodgedAttack(getStrength())) {
 			moveToPrevPosition();
-		if (other.getStrength() <= getStrength()) {
+		}
+		else if (other.getStrength() <= getStrength()) {
 			other.kill();
 			message = other.getClassName() + " was slain by " + getClassName();
 			m_world.addMessage(std::move(message));
