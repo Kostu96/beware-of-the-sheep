@@ -24,7 +24,7 @@ namespace bots {
 	void Animal::collision(Entity & other)
 	{
 		std::string message;
-		if (dynamic_cast<Plant *>(&other)) {
+		if (dynamic_cast<Plant*>(&other)) {
 			other.kill();
 			message = other.getClassName() + " was eaten by " + getClassName();
 			m_world.addMessage(std::move(message));
@@ -38,7 +38,9 @@ namespace bots {
 			if (count > 0)
 				m_world.spawnEntity(getKind(), arr[rand() % count]);
 		}
-		else if (other.getStrength() <= getStrength()) {
+		else if (other.dodgedAttack())
+			moveToPrevPosition();
+		if (other.getStrength() <= getStrength()) {
 			other.kill();
 			message = other.getClassName() + " was slain by " + getClassName();
 			m_world.addMessage(std::move(message));

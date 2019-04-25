@@ -10,7 +10,7 @@ namespace bots {
 
 	void Fox::action()
 	{
-		Point dir[4];
+		Point dir[4]{};
 		unsigned int count = 0;
 
 		long lxpos = static_cast<long>(getPosition().x), lypos = static_cast<long>(getPosition().y);
