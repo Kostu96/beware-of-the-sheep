@@ -13,10 +13,12 @@ namespace bots {
 		std::string message;
 
 		int x = _getch();
-		if (x == 32 && m_specialSkillCooldownTimer == 0 && !m_isSpecialSkillOn) {
-			m_isSpecialSkillOn = true;
-			message = "Special skill was activated.";
-			m_world.addMessage(std::move(message));
+		while (x == 32) {
+			if (m_specialSkillCooldownTimer == 0 && !m_isSpecialSkillOn) {
+				m_isSpecialSkillOn = true;
+				message = "Special skill was activated.";
+				m_world.addMessage(std::move(message));
+			}
 
 			x = _getch();
 		}
