@@ -35,6 +35,11 @@ namespace bots {
 
 		virtual void action() = 0;
 		virtual void collision(Entity & other) = 0;
+
+		virtual inline std::string getSymbol() const = 0;
+		virtual inline Kind getKind() const = 0;
+		virtual inline std::string getClassName() const = 0;
+
 		void draw(Area & area) const;
 
 		inline const Point & getPosition() const { return m_position; }
@@ -46,15 +51,14 @@ namespace bots {
 		inline void addStrength(unsigned int x) { m_strength += x; }
 		inline void incrementLifeTime() { ++m_lifeTime; }
 		inline void kill() { m_isAlive = false; }
+		virtual bool dodgedAttack(unsigned int /*strength*/) const { return false; }
 	protected:
 		void move(int x, int y);
-		
-		virtual inline const char * getSymbol() const = 0;
-		virtual inline Kind getKind() const = 0;
-		virtual inline const char * getClassName() const = 0;
+		void moveToPrevPosition();
 
 		World & m_world;
 	private:
+		Point m_prevPosition;
 		Point m_position;
 		unsigned int m_strength;
 		unsigned int m_initiative;

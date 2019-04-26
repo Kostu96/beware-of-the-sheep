@@ -13,16 +13,17 @@ namespace bots {
 		srand(static_cast<unsigned int>(time(nullptr)));
 
 		spawnEntity(Entity::Kind::Human, { 1, 1 });
-		//spawnEntity(Entity::Kind::CyberSheep, { 15, 15 });
-
 		spawnEntity(Entity::Kind::Antelope, { 3, 3 });
-		spawnEntity(Entity::Kind::Bellandona, { 5, 5 });
-		spawnEntity(Entity::Kind::Dandelion, { 7, 7 });
+		spawnEntity(Entity::Kind::Bellandona, { 9, 5 });
+		spawnEntity(Entity::Kind::Dandelion, { 3, 7 });
 		spawnEntity(Entity::Kind::Fox, { 9, 9 });
 		spawnEntity(Entity::Kind::Grass, { 11, 11 });
 		spawnEntity(Entity::Kind::Guarana, { 13, 13 });
 		spawnEntity(Entity::Kind::Hogweed, { 15, 15 });
-		spawnEntity(Entity::Kind::Sheep, { 17, 17 });
+		spawnEntity(Entity::Kind::Sheep, { 17, 18 });
+		spawnEntity(Entity::Kind::Sheep, { 17, 16 });
+		spawnEntity(Entity::Kind::Sheep, { 16, 17 });
+		spawnEntity(Entity::Kind::Sheep, { 19, 17 });
 		spawnEntity(Entity::Kind::Turtle, { 19, 19 });
 		spawnEntity(Entity::Kind::Wolf, { 21, 21 });
 	}
@@ -105,6 +106,8 @@ namespace bots {
 			m_entities.push_back(std::make_shared<Hogweed>(*this, position));
 			break;
 		}
+		std::string message = m_entities[m_entities.size() - 1]->getClassName() + " spawned at " + position.to_string();
+		addMessage(std::move(message));
 	}
 
 	void World::tick()
@@ -116,12 +119,12 @@ namespace bots {
 		for (std::size_t i = 0; i < size; ++i)
 			if (m_entities[i]->isAlive()) {
 				m_entities[i]->action();
+
 				const Point & position = m_entities[i]->getPosition();
 				auto e = getEntityAt(position.x, position.y);
-				if (e) {
+				if (e && e != m_entities[i])
 					m_entities[i]->collision(*e);
-					e->collision(*m_entities[i]);
-				}
+
 				m_entities[i]->incrementLifeTime();
 			}
 	}
@@ -141,10 +144,17 @@ namespace bots {
 		std::cout << "\n=================================================\n";
 	}
 
+	void World::printMessages()
+	{
+		for (const auto & m : m_messages)
+			std::cout << m << '\n';
+		m_messages.clear();
+	}
+
 	void World::print()
 	{
 		std::system("cls");
-		std::cout << "Kontanty Misiak 175524\n";
+		std::cout << "Kontanty Misiak 175524";
 		printSpacer();
 		printLegend();
 		printSpacer();
@@ -153,6 +163,9 @@ namespace bots {
 		for (const auto & e : m_entities)
 			e->draw(m_area);
 		m_area.print();
+		std::cout << '\n';
+
+		printMessages();
 	}
 
 } // namepace bots

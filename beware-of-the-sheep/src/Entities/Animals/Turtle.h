@@ -16,12 +16,11 @@ namespace bots {
 
 		void action() override;
 		void collision(Entity & other) override;
+		bool dodgedAttack(unsigned int strength) const override { return strength < 5; }
 	protected:
-		inline const char * getSymbol() const override { return "TT"; }
+		inline std::string getSymbol() const override { return "TT"; }
 		inline Kind getKind() const override { return Kind::Turtle; }
-		inline const char * getClassName() const override { return "Turtle"; }
-	private:
-
+		inline std::string getClassName() const override { return "Turtle"; }
 	};
 
 } // namespace bots

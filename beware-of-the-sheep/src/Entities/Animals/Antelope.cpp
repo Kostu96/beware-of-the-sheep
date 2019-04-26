@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Antelope.h"
+#include "World.h"
 
 namespace bots {
 
@@ -22,8 +23,19 @@ namespace bots {
 
 	void Antelope::collision(Entity & other)
 	{
-		Animal::collision(other);
-		// TODO: rest
+		int x = rand() % 2;
+		if (x == 0)
+			Animal::collision(other);
+		else {
+			Area::NeighboursArray arr{};
+			unsigned int count = m_world.getFreeSpaceAround(getPosition(), arr);
+			if (count > 0) {
+				Point d = arr[rand() % count];
+				move(d.x - getPosition().x, d.y - getPosition().y);
+			}
+			else
+				Animal::collision(other);
+		}
 	}
 
 } // namespace bots

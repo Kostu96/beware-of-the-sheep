@@ -15,13 +15,16 @@ namespace bots {
 		virtual ~Human() = default;
 
 		void action() override;
-		// TODO: add collision
 	protected:
-		inline const char * getSymbol() const override { return "HM"; }
+		inline std::string getSymbol() const override { return "HM"; }
 		inline Kind getKind() const override { return Kind::Human; }
-		inline const char * getClassName() const override { return "Human"; }
+		inline std::string getClassName() const override { return "Human"; }
 	private:
-
+		static const unsigned int SPECIAL_SKILL_DURATION = 5;
+		static const unsigned int SPECIAL_SKILL_COOLDOWN = 5;
+		bool m_isSpecialSkillOn = false;
+		unsigned int m_specialSkillDurationTimer = 0;
+		unsigned int m_specialSkillCooldownTimer = 0;
 	};
 
 } // namespace bots

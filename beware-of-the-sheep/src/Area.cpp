@@ -14,9 +14,9 @@ namespace bots {
 		delete[] m_arr;
 	}
 
-	void Area::put(unsigned int x, unsigned int y, const char * str)
+	void Area::put(unsigned int x, unsigned int y, const std::string & str)
 	{
-		if (strlen(str) != 2)
+		if (str.size() != 2)
 			throw std::exception("Entity symbol must have 2 characters!");
 
 		if (x >= 0 && x < m_width && y >= 0 && y < m_height)
@@ -28,9 +28,9 @@ namespace bots {
 			throw std::exception("Wrong position!");
 	}
 
-	void Area::put(const Point & position, const char * str)
+	void Area::put(const Point & position, const std::string & str)
 	{
-		if (strlen(str) != 2)
+		if (str.size() != 2)
 			throw std::exception("Entity symbol must have 2 characters!");
 
 		unsigned int x = position.x;

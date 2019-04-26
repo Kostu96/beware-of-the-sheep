@@ -16,9 +16,9 @@ namespace bots {
 
 		void collision(Entity & other) override;
 	protected:
-		inline const char * getSymbol() const override { return "GA"; }
+		inline std::string getSymbol() const override { return "GA"; }
 		inline Kind getKind() const override { return Kind::Guarana; }
-		inline const char * getClassName() const override { return "Guarana"; }
+		inline std::string getClassName() const override { return "Guarana"; }
 	private:
 
 	};
