@@ -20,7 +20,10 @@ namespace bots {
 		spawnEntity(Entity::Kind::Grass, { 11, 11 });
 		spawnEntity(Entity::Kind::Guarana, { 13, 13 });
 		spawnEntity(Entity::Kind::Hogweed, { 15, 15 });
-		spawnEntity(Entity::Kind::Sheep, { 17, 17 });
+		spawnEntity(Entity::Kind::Sheep, { 17, 18 });
+		spawnEntity(Entity::Kind::Sheep, { 17, 16 });
+		spawnEntity(Entity::Kind::Sheep, { 16, 17 });
+		spawnEntity(Entity::Kind::Sheep, { 19, 17 });
 		spawnEntity(Entity::Kind::Turtle, { 19, 19 });
 		spawnEntity(Entity::Kind::Wolf, { 21, 21 });
 	}

@@ -15,7 +15,6 @@ namespace bots {
 		virtual ~Human() = default;
 
 		void action() override;
-		// TODO: add collision
 	protected:
 		inline std::string getSymbol() const override { return "HM"; }
 		inline Kind getKind() const override { return Kind::Human; }
