@@ -11,8 +11,8 @@ public class Board extends JPanel {
 		super();
 	}
 	
-	 @Override
-	    public void paintComponent(Graphics g) {
-		 	
-	    }
+	@Override
+	public void paintComponent(Graphics g) {
+	
+	}
 }
