@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Turtle extends Animal {
 
-	public Turtle(World world, Point position, int strength, int initiative) {
-		super(world, position, strength, initiative);
+	public Turtle(World world, Point position) {
+		super(world, position, 2, 1);
 	}
 
 	@Override

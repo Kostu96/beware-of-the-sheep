@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Wolf extends Animal {
 
-	public Wolf(World world, Point position, int strength, int initiative) {
-		super(world, position, strength, initiative);
+	public Wolf(World world, Point position) {
+		super(world, position, 9, 5);
 	}
 
 	@Override

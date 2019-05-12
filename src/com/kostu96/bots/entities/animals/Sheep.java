@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Sheep extends Animal {
 
-	public Sheep(World world, Point position, int strength, int initiative) {
-		super(world, position, strength, initiative);
+	public Sheep(World world, Point position) {
+		super(world, position, 4, 4);
 	}
 
 	@Override

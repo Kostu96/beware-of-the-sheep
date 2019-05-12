@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Fox extends Animal {
 
-	public Fox(World world, Point position, int strength, int initiative) {
-		super(world, position, strength, initiative);
+	public Fox(World world, Point position) {
+		super(world, position, 3, 7);
 	}
 
 	@Override

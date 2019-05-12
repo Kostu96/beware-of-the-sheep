@@ -6,13 +6,12 @@ import com.kostu96.bots.utils.Point;
 
 public class Antelope extends Animal {
 
-	public Antelope(World world, Point position, int strength, int initiative) {
-		super(world, position, strength, initiative);
+	public Antelope(World world, Point position) {
+		super(world, position, 4, 4);
 	}
 
 	@Override
 	public void collision(Entity other) {
-		// TODO Auto-generated method stub
 
 	}
 
