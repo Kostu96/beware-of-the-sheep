@@ -5,9 +5,10 @@ import com.kostu96.bots.entities.Entity;
 import com.kostu96.bots.utils.Point;
 
 public class Belladonna extends Plant {
+	private static final int STRENGTH = 99;
 
 	public Belladonna(World world, Point position) {
-		super(world, position, 99);
+		super(world, position, STRENGTH);
 	}
 
 	@Override

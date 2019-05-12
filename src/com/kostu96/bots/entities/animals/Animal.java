@@ -7,7 +7,7 @@ import com.kostu96.bots.entities.Entity;
 import com.kostu96.bots.utils.Point;
 
 public abstract class Animal extends Entity {
-
+	
 	public Animal(World world, Point position, int strength, int initiative) {
 		super(world, position, strength, initiative);
 	}

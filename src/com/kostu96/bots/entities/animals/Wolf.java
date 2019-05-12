@@ -5,9 +5,11 @@ import com.kostu96.bots.entities.Entity;
 import com.kostu96.bots.utils.Point;
 
 public class Wolf extends Animal {
+	private static final int STRENGTH = 9;
+	private static final int INITIATIVE = 5;
 
 	public Wolf(World world, Point position) {
-		super(world, position, 9, 5);
+		super(world, position, STRENGTH, INITIATIVE);
 	}
 
 	@Override

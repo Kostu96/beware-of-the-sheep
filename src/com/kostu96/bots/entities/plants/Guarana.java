@@ -5,9 +5,10 @@ import com.kostu96.bots.entities.Entity;
 import com.kostu96.bots.utils.Point;
 
 public class Guarana extends Plant {
+	private static final int STRENGTH = 0;
 
 	public Guarana(World world, Point position) {
-		super(world, position, 0);
+		super(world, position, STRENGTH);
 	}
 
 	@Override
