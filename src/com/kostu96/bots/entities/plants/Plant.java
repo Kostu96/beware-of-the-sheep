@@ -10,4 +10,8 @@ public abstract class Plant extends Entity {
 		super(world, position, strength, 0);
 	}
 
+	@Override
+	public void action() {
+		
+	}
 }
