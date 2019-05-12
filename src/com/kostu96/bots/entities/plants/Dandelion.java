@@ -4,9 +4,9 @@ import com.kostu96.bots.World;
 import com.kostu96.bots.entities.Entity;
 import com.kostu96.bots.utils.Point;
 
-public class Belladonna extends Plant {
+public class Dandelion extends Plant {
 
-	public Belladonna(World world, Point position, int strength) {
+	public Dandelion(World world, Point position, int strength) {
 		super(world, position, strength);
 	}
 
