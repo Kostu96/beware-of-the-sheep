@@ -31,6 +31,12 @@ public final class App extends JFrame {
 	
 	public static void main(String[] args) {
 		new App();
+		
+		World world = new World(20, 20);
+		while (true)
+		{
+			world.tick();
+		}
 	}
 
 }
