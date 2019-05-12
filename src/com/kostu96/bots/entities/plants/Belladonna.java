@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Belladonna extends Plant {
 
-	public Belladonna(World world, Point position, int strength) {
-		super(world, position, strength);
+	public Belladonna(World world, Point position) {
+		super(world, position, 99);
 	}
 
 	@Override

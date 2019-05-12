@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Dandelion extends Plant {
 
-	public Dandelion(World world, Point position, int strength) {
-		super(world, position, strength);
+	public Dandelion(World world, Point position) {
+		super(world, position, 0);
 	}
 
 	@Override

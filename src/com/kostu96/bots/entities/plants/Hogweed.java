@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Hogweed extends Plant {
 
-	public Hogweed(World world, Point position, int strength) {
-		super(world, position, strength);
+	public Hogweed(World world, Point position) {
+		super(world, position, 10);
 	}
 
 	@Override

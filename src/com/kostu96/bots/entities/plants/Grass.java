@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Grass extends Plant {
 
-	public Grass(World world, Point position, int strength) {
-		super(world, position, strength);
+	public Grass(World world, Point position) {
+		super(world, position, 0);
 	}
 
 	@Override

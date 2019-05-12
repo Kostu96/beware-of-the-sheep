@@ -6,8 +6,8 @@ import com.kostu96.bots.utils.Point;
 
 public class Guarana extends Plant {
 
-	public Guarana(World world, Point position, int strength) {
-		super(world, position, strength);
+	public Guarana(World world, Point position) {
+		super(world, position, 0);
 	}
 
 	@Override
