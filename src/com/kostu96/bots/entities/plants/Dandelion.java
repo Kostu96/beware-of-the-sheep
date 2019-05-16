@@ -13,10 +13,12 @@ public class Dandelion extends Plant {
 	}
 
 	@Override
-	public void collision(Entity other) {
-
+	public void action() {
+		super.action();
+		super.action();
+		super.action();
 	}
-
+	
 	@Override
 	public ImageID getImageID() {
 		return ImageID.DANDELION;

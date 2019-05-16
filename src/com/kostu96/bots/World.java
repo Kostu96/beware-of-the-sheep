@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Vector;
 import java.util.function.Predicate;
 
 import javax.swing.BoxLayout;
@@ -23,17 +24,12 @@ public class World extends JPanel {
 	private List<Entity> entities;
 	private boolean[][] area;
 	
-	private Entity getEntityAt(int x, int y) {
-		for(Entity e : entities)
-			if(e.getPosition().x == x && e.getPosition().y == y)
-		    	return e;
-		
-		return null;
-	}
-	
 	private void addEntity(Entity e) {
 		entities.add(e);
 		area[e.getPosition().x][e.getPosition().y] = true;
+		
+		// TODO: messages
+		System.out.println(e.getClassName() + " was spawned at " + e.getPosition());
 	}
 	
 	private void removeKilledEntities() {
@@ -92,8 +88,7 @@ public class World extends JPanel {
 				if (area[j][i])	{
 					Entity e = getEntityAt(j, i);
 					c = new Cell(ImageManager.getImage(e.getImageID()));
-					String name = e.getClass().getName();
-					c.setToolTipText(name.substring(name.lastIndexOf('.') + 1));
+					c.setToolTipText(e.getClassName());
 					row.add(c);
 				}
 				else {
@@ -122,5 +117,53 @@ public class World extends JPanel {
 					e.collision(x);
 				e.incrementLifeTime();
 			}
+	}
+	
+	public Entity getEntityAt(int x, int y) {
+		for(Entity e : entities)
+			if(e.getPosition().x == x && e.getPosition().y == y)
+		    	return e;
+		
+		return null;
+	}
+	
+	public Vector<Point> getFreeSpaceAround(Point pos) {
+		Vector<Point> arr = new Vector<>();
+
+		int nx = (pos.x - 1 < 0 ? pos.x - 1 + columns : (pos.x - 1) % columns);
+		if (!area[nx][pos.y])
+			arr.add(new Point(nx, pos.y));
+
+		nx = (pos.x + 1 < 0 ? pos.x + 1 + columns : (pos.x + 1) % columns);
+		if (!area[nx][pos.y])
+			arr.add(new Point(nx, pos.y));
+
+		int ny = (pos.y - 1 < 0 ? pos.y - 1 + rows : (pos.y - 1) % rows);
+		if (!area[pos.x][ny])
+			arr.add(new Point(pos.x, ny));
+
+		ny = (pos.y + 1 < 0 ? pos.y + 1 + rows : (pos.y + 1) % rows);
+		if (!area[pos.x][ny])
+			arr.add(new Point(pos.x, ny));
+
+		return arr; 
+	}
+	
+	public void spawnEntity(String className, Point position) {
+		switch (className) {
+		case "Antelope": addEntity(new Antelope(this, position)); break;
+		case "CyberSheep": addEntity(new Antelope(this, position)); break;
+		case "Fox": addEntity(new Antelope(this, position)); break;
+		case "Human": addEntity(new Antelope(this, position)); break;
+		case "Sheep": addEntity(new Antelope(this, position)); break;
+		case "Turtle": addEntity(new Antelope(this, position)); break;
+		case "Wolf": addEntity(new Antelope(this, position)); break;
+		case "Belladonna": addEntity(new Antelope(this, position)); break;
+		case "Dandelion": addEntity(new Antelope(this, position)); break;
+		case "Grass": addEntity(new Antelope(this, position)); break;
+		case "Guarana": addEntity(new Antelope(this, position)); break;
+		case "Hogweed": addEntity(new Antelope(this, position)); break;
+		default: break;
+		}
 	}
 }

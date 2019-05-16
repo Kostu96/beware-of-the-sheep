@@ -13,11 +13,6 @@ public class Grass extends Plant {
 	}
 
 	@Override
-	public void collision(Entity other) {
-
-	}
-
-	@Override
 	public ImageID getImageID() {
 		return ImageID.GRASS;
 	}

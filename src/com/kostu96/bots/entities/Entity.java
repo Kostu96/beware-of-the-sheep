@@ -59,5 +59,10 @@ public abstract class Entity {
 	abstract public void collision(Entity other);
 	
 	abstract public ImageID getImageID();
+	
+	public String getClassName() {
+		String name = getClass().getName();
+		return name.substring(name.lastIndexOf('.') + 1);
+	}
 
 }
