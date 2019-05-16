@@ -2,6 +2,8 @@ package com.kostu96.bots;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -9,7 +11,7 @@ import javax.swing.JFrame;
 
 public final class App extends JFrame {
 	private static final long serialVersionUID = 1L;
-
+	
 	private World world;
 	
 	public App() throws IOException {
@@ -18,7 +20,12 @@ public final class App extends JFrame {
 		world = new World(18, 18);
 		add(world);
 		
-		add(new JButton("Tura"), BorderLayout.EAST);
+		JButton turnBtn = new JButton("Turn");
+		turnBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) { world.turn(); }
+		});
+		add(turnBtn, BorderLayout.EAST);
 		
 	    setTitle("Beware Of The Sheep");
 	    setSize(1280, 720);
