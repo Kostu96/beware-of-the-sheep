@@ -15,18 +15,18 @@ public class Cell extends JButton {
 	Cell(Image image) {
 		super(new ImageIcon(image));
 		
-		setBorder(BorderFactory.createLineBorder(Color.gray));
+		setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
 
 		addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				setBorder(BorderFactory.createLineBorder(Color.yellow));
+				setBorder(BorderFactory.createLineBorder(Color.gray, 1));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				setBorder(BorderFactory.createLineBorder(Color.gray));
+				setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
 			}
 		});
 	}

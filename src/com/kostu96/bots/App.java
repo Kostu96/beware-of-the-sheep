@@ -1,8 +1,10 @@
 package com.kostu96.bots;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public final class App extends JFrame {
@@ -15,6 +17,8 @@ public final class App extends JFrame {
 		
 		world = new World(18, 18);
 		add(world);
+		
+		add(new JButton("Tura"), BorderLayout.EAST);
 		
 	    setTitle("Beware Of The Sheep");
 	    setSize(1280, 720);

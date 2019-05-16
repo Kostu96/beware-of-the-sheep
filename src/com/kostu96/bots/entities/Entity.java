@@ -1,6 +1,7 @@
 package com.kostu96.bots.entities;
 
 import com.kostu96.bots.World;
+import com.kostu96.bots.utils.ImageManager.ImageID;
 import com.kostu96.bots.utils.Point;
 
 public abstract class Entity {
@@ -56,4 +57,7 @@ public abstract class Entity {
 	abstract public void action();
 	
 	abstract public void collision(Entity other);
+	
+	abstract public ImageID getImageID();
+
 }
