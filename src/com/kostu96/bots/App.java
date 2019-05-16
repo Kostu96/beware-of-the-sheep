@@ -1,25 +1,20 @@
 package com.kostu96.bots;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import java.awt.EventQueue;
+import java.io.IOException;
+
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public final class App extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	public App() {
+	private World world;
+	
+	public App() throws IOException {
 		super();
 		
-		add(new Board());
-		
-		JPanel buttons = new JPanel();
-		buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
-		
-		JButton newGameButton = new JButton("New Game");
-		buttons.add(newGameButton);
-	        
-		add(buttons);
+		world = new World(18, 18);
+		add(world);
 		
 	    setTitle("Beware Of The Sheep");
 	    setSize(1280, 720);
@@ -30,13 +25,12 @@ public final class App extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new App();
-		
-		World world = new World(20, 20);
-		while (true)
-		{
-			world.tick();
-		}
+		EventQueue.invokeLater(() -> {
+            try {
+				new App();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        });
 	}
-
 }
