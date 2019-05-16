@@ -1,15 +1,14 @@
 package com.kostu96.bots;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import com.kostu96.bots.entities.Entity;
+import com.kostu96.bots.utils.ImageManager;
 
 public class World extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +30,7 @@ public class World extends JPanel {
 			row.setLayout(new BoxLayout(row, BoxLayout.X_AXIS));
 			row.setAlignmentX(LEFT_ALIGNMENT);
 			for (int j = 0; j < columns; ++j) {
-				row.add(new Cell(ImageIO.read(new File("assets/empty.png"))));
+				row.add(new Cell(ImageManager.getImage(ImageManager.ImageID.EMPTY)));
 			}
 			add(row);
 		}
