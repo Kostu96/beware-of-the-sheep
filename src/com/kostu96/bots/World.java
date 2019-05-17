@@ -141,8 +141,6 @@ public class World extends JPanel {
 	public int getRows() { return rows; }
 	
 	public void turn() {
-		removeKilledEntities();
-		updateImages();
 		sortEntities();
 		
 		int size = entities.size();
@@ -157,6 +155,8 @@ public class World extends JPanel {
 				e.incrementLifeTime();
 			}
 		}
+		removeKilledEntities();
+		updateImages();
 	}
 	
 	public Entity getEntityAt(int x, int y) {

@@ -50,12 +50,12 @@ public abstract class Animal extends Entity {
 			other.kill();
 			
 			// TODO: messages
-			System.out.println(other.getClassName() + " was eaten by " + getClassName());
+			System.out.println(other.getClassName() + " was slain by " + getClassName());
 		}
 		else {
 			kill();
 			// TODO: messages
-			System.out.println(getClassName() + " was eaten by " + other.getClassName());
+			System.out.println(getClassName() + " was slain by " + other.getClassName());
 		}
 	}
 }
