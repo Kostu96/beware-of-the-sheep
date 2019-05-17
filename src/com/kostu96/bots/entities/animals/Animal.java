@@ -45,6 +45,9 @@ public abstract class Animal extends Entity {
 		}
 		else if (other.dodgedAttack(getStrength())) {
 			moveToPrevPosition();
+			
+			// TODO: messages
+			System.out.println(other.getClassName() + " dodged " + getClassName() + " attack");
 		}
 		else if (other.getStrength() <= getStrength()) {
 			other.kill();
