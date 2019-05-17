@@ -1,5 +1,1 @@
-# VS files
-*.vs
-
-# Build folder
-bin
+/bin/
