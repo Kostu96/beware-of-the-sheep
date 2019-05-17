@@ -18,8 +18,8 @@ public abstract class Entity {
 	protected void move(int x, int y) {
 		m_prevPosition = m_position;
 		
-		int width = m_world.getWidth();
-		int height = m_world.getHeight();
+		int width = m_world.getColumns();
+		int height = m_world.getRows();
 		
 		int newX = m_position.x + x;
 		m_position.x = newX < 0 ? newX + width : newX % width;
@@ -27,7 +27,7 @@ public abstract class Entity {
 		m_position.y = newY < 0 ? newY + height : newY % height;
 	}
 	
-	protected void moveToPrevPosition() { move(m_prevPosition.x, m_prevPosition.y); }
+	protected void moveToPrevPosition() { m_position = m_prevPosition; }
 	
 	public Entity(World world, Point position, int strength, int initiative) {
 		m_isAlive = true;

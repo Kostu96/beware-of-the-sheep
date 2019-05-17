@@ -155,7 +155,7 @@ public class World extends JPanel {
 				Point p = e.getPosition();
 				Entity x = getEntityAt(p.x, p.y);
 				if (x != null && x != e)
-					e.collision(x);
+					x.collision(e);
 				e.incrementLifeTime();
 			}
 		}
