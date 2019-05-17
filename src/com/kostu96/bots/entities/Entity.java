@@ -16,20 +16,21 @@ public abstract class Entity {
 	protected World m_world;
 	
 	protected void move(int x, int y) {
-		m_isAlive = true;
-		
 		m_prevPosition = m_position;
 		
 		int width = m_world.getWidth();
 		int height = m_world.getHeight();
 		
-		m_position.x = x < 0 ? x + width : x % width;
-		m_position.y = y < 0 ? y + height : y % height;
+		int newX = m_position.x + x;
+		m_position.x = newX < 0 ? newX + width : newX % width;
+		int newY = m_position.y + y;
+		m_position.y = newY < 0 ? newY + height : newY % height;
 	}
 	
 	protected void moveToPrevPosition() { move(m_prevPosition.x, m_prevPosition.y); }
 	
 	public Entity(World world, Point position, int strength, int initiative) {
+		m_isAlive = true;
 		m_world = world;
 		m_position = position;
 		m_strength = strength;
@@ -63,6 +64,10 @@ public abstract class Entity {
 	public String getClassName() {
 		String name = getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1);
+	}
+
+	public boolean dodgedAttack(int strength) {
+		return false;
 	}
 
 }

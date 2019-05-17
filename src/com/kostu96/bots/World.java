@@ -8,6 +8,7 @@ import java.util.Vector;
 import java.util.function.Predicate;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.kostu96.bots.entities.Entity;
@@ -22,14 +23,36 @@ public class World extends JPanel {
 	
 	private int columns, rows;
 	private List<Entity> entities;
+	private List<Cell> tiles;
 	private boolean[][] area;
 	
 	private void addEntity(Entity e) {
+		Point p = e.getPosition();
 		entities.add(e);
-		area[e.getPosition().x][e.getPosition().y] = true;
+		area[p.x][p.y] = true;
 		
 		// TODO: messages
-		System.out.println(e.getClassName() + " was spawned at " + e.getPosition());
+		System.out.println(e.getClassName() + " was spawned at " + p);
+	}
+	
+	private void updateImages() {
+		for (int i = 0; i < rows; ++i) {
+			for (int j = 0; j < columns; ++j) {
+				Cell c = getTileAt(j, i);
+				Entity e = getEntityAt(j, i);
+				try {
+					if (e != null) {
+						c.setIcon(new ImageIcon(ImageManager.getImage(e.getImageID())));
+						c.setToolTipText(e.getClassName());
+					} else {
+						c.setIcon(new ImageIcon(ImageManager.getImage(ImageID.EMPTY)));
+						c.setToolTipText(null);
+					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	private void removeKilledEntities() {
@@ -38,7 +61,7 @@ public class World extends JPanel {
 			public boolean test(Entity t) {
 				if (!t.isAlive()) {
 					Point p = t.getPosition();
-					area[p.x][p.y]= false; 
+					area[p.x][p.y]= false;
 					return true;
 				}
 				return false;
@@ -63,6 +86,10 @@ public class World extends JPanel {
 		});
 	}
 	
+	private Cell getTileAt(int x, int y) {
+		return tiles.get(y * columns + x);
+	}
+	
 	public World(int columns, int rows) throws IOException {
 		super();
 		
@@ -71,11 +98,19 @@ public class World extends JPanel {
 		
 		entities = new ArrayList<>();
 		area = new boolean[columns][rows];
+		tiles = new ArrayList<>();
 		
-		addEntity(new Grass(this, new Point(1, 1)));
-		addEntity(new Grass(this, new Point(2, 1)));
-		addEntity(new Grass(this, new Point(3, 1)));
-		addEntity(new Dandelion(this, new Point(5, 5)));
+		addEntity(new Antelope(this, new Point(1, 1)));
+		addEntity(new CyberSheep(this, new Point(2, 3)));
+		addEntity(new Fox(this, new Point(4, 5)));
+		addEntity(new Sheep(this, new Point(4, 7)));
+		addEntity(new Turtle(this, new Point(5, 9)));
+		addEntity(new Wolf(this, new Point(6, 11)));
+		addEntity(new Belladonna(this, new Point(2, 13)));
+		addEntity(new Dandelion(this, new Point(3, 15)));
+		addEntity(new Grass(this, new Point(4, 17)));
+		addEntity(new Guarana(this, new Point(12, 12)));
+		addEntity(new Hogweed(this, new Point(5, 5)));
 		addEntity(new Human(this, new Point(10, 10)));
 				
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -95,6 +130,7 @@ public class World extends JPanel {
 					c = new Cell(ImageManager.getImage(ImageID.EMPTY));
 					row.add(c);
 				}
+				tiles.add(c);
 			}
 			add(row);
 		}
@@ -106,9 +142,12 @@ public class World extends JPanel {
 	
 	public void turn() {
 		removeKilledEntities();
+		updateImages();
 		sortEntities();
 		
-		for (Entity e : entities)
+		int size = entities.size();
+		for (int i = 0; i < size; ++i) {
+			Entity e = entities.get(i);
 			if (e.isAlive()) {
 				e.action();
 				Point p = e.getPosition();
@@ -117,6 +156,7 @@ public class World extends JPanel {
 					e.collision(x);
 				e.incrementLifeTime();
 			}
+		}
 	}
 	
 	public Entity getEntityAt(int x, int y) {
@@ -152,17 +192,17 @@ public class World extends JPanel {
 	public void spawnEntity(String className, Point position) {
 		switch (className) {
 		case "Antelope": addEntity(new Antelope(this, position)); break;
-		case "CyberSheep": addEntity(new Antelope(this, position)); break;
-		case "Fox": addEntity(new Antelope(this, position)); break;
-		case "Human": addEntity(new Antelope(this, position)); break;
-		case "Sheep": addEntity(new Antelope(this, position)); break;
-		case "Turtle": addEntity(new Antelope(this, position)); break;
-		case "Wolf": addEntity(new Antelope(this, position)); break;
-		case "Belladonna": addEntity(new Antelope(this, position)); break;
-		case "Dandelion": addEntity(new Antelope(this, position)); break;
-		case "Grass": addEntity(new Antelope(this, position)); break;
-		case "Guarana": addEntity(new Antelope(this, position)); break;
-		case "Hogweed": addEntity(new Antelope(this, position)); break;
+		case "CyberSheep": addEntity(new CyberSheep(this, position)); break;
+		case "Fox": addEntity(new Fox(this, position)); break;
+		case "Human": addEntity(new Human(this, position)); break;
+		case "Sheep": addEntity(new Sheep(this, position)); break;
+		case "Turtle": addEntity(new Turtle(this, position)); break;
+		case "Wolf": addEntity( new Wolf(this, position)); break;
+		case "Belladonna": addEntity(new Belladonna(this, position)); break;
+		case "Dandelion": addEntity(new Dandelion(this, position)); break;
+		case "Grass": addEntity(new Grass(this, position)); break;
+		case "Guarana": addEntity(new Guarana(this, position)); break;
+		case "Hogweed": addEntity(new Hogweed(this, position)); break;
 		default: break;
 		}
 	}

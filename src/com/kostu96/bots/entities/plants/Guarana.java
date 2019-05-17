@@ -17,8 +17,9 @@ public class Guarana extends Plant {
 	public void collision(Entity other) {
 		if (other instanceof Animal) {
 			other.addStrength(3);
-			//std::string message = other.getClassName() + " has now " + std::to_string(other.getStrength()) + " Strength";
-			//m_world.addMessage(std::move(message));
+			
+			// TODO: messages
+			System.out.println(other.getClassName() + " has now " + other.getStrength() + " Strength");
 		}
 	}
 

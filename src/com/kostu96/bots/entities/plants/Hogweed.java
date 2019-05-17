@@ -23,23 +23,33 @@ public class Hogweed extends Plant {
 
 		int nx = (xpos - 1 < 0 ? xpos - 1 + width : (xpos - 1) % width);
 		Entity e = m_world.getEntityAt(nx, ypos);
-		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep))
+		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep)) {
 			e.kill();
+			System.out.println(e.getClassName() + " was slain by " + getClassName());
+		}
 
 		nx = (xpos + 1 < 0 ? xpos + 1 + width : (xpos + 1) % width);
 		e = m_world.getEntityAt(nx, ypos);
-		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep))
+		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep)) {
 			e.kill();
+			System.out.println(e.getClassName() + " was slain by " + getClassName());
+		}
 
 		int ny = (ypos - 1 < 0 ? ypos - 1 + height : (ypos - 1) % height);
 		e = m_world.getEntityAt(xpos, ny);
-		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep))
+		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep)) {
 			e.kill();
+			System.out.println(e.getClassName() + " was slain by " + getClassName());
+		}
 
 		ny = (ypos + 1 < 0 ? ypos + 1 + height : (ypos + 1) % height);
 		e = m_world.getEntityAt(xpos, ny);
-		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep))
+		if (e instanceof Animal && !(e instanceof Hogweed) && !(e instanceof CyberSheep)) {
 			e.kill();
+			System.out.println(e.getClassName() + " was slain by " + getClassName());
+		}
+		
+		// TODO: messages
 	}
 	
 	@Override

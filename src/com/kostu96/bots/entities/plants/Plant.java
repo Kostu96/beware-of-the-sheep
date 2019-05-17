@@ -17,9 +17,9 @@ public abstract class Plant extends Entity {
 	public void action() {
 		Vector<Point> arr = m_world.getFreeSpaceAround(getPosition());
 		
-		int c = Randmizer.getInt(0, 8);
+		int c = Randmizer.getInt(0, 20);
 		if (c == 0 && arr.size() > 0) {
-			Point p = arr.get(Randmizer.getInt(0, arr.size()));
+			Point p = arr.get(Randmizer.getInt(0, arr.size() - 1));
 			m_world.spawnEntity(getClassName(), p);
 		}
 	}

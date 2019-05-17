@@ -17,8 +17,9 @@ public class Belladonna extends Plant {
 	public void collision(Entity other) {
 		if (other instanceof Animal && other.getStrength() < getStrength()) {
 			other.kill();
-			//std::string message = other.getClassName() + " was slain by " + getClassName();
-			//m_world.addMessage(std::move(message));
+			
+			// TODO: messages
+			System.out.println(other.getClassName() + " was slain by " + getClassName());
 		}
 	}
 
