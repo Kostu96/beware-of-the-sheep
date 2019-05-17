@@ -101,17 +101,21 @@ public class World extends JPanel {
 		tiles = new ArrayList<>();
 		
 		addEntity(new Antelope(this, new Point(1, 1)));
-		addEntity(new CyberSheep(this, new Point(2, 3)));
+		addEntity(new Antelope(this, new Point(1, 3)));
 		addEntity(new Fox(this, new Point(4, 5)));
+		addEntity(new Fox(this, new Point(6, 5)));
 		addEntity(new Sheep(this, new Point(4, 7)));
+		addEntity(new Sheep(this, new Point(4, 9)));
 		addEntity(new Turtle(this, new Point(5, 9)));
+		addEntity(new Turtle(this, new Point(6, 9)));
 		addEntity(new Wolf(this, new Point(6, 11)));
+		addEntity(new Wolf(this, new Point(6, 13)));
 		addEntity(new Belladonna(this, new Point(2, 13)));
 		addEntity(new Dandelion(this, new Point(3, 15)));
 		addEntity(new Grass(this, new Point(4, 17)));
 		addEntity(new Guarana(this, new Point(12, 12)));
 		addEntity(new Hogweed(this, new Point(5, 5)));
-		addEntity(new Human(this, new Point(10, 10)));
+		//addEntity(new Human(this, new Point(10, 10)));
 				
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		for (int i = 0; i < rows; ++i) {
