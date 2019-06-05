@@ -3,7 +3,7 @@ from .entities import Plant
 
 class Belladonna(Plant):
     def __init__(self, world, position):
-        super().__init__(world, position)
+        super().__init__(world, position, 99)
 
     def getColor(self):
         return (200, 0, 50)
@@ -14,7 +14,7 @@ class Belladonna(Plant):
 
 class Dandelion(Plant):
     def __init__(self, world, position):
-        super().__init__(world, position)
+        super().__init__(world, position, 0)
 
     def getColor(self):
         return (255, 255, 0)
@@ -25,7 +25,7 @@ class Dandelion(Plant):
 
 class Grass(Plant):
     def __init__(self, world, position):
-        super().__init__(world, position)
+        super().__init__(world, position, 0)
 
     def getColor(self):
         return (0, 255, 0)
@@ -36,7 +36,7 @@ class Grass(Plant):
 
 class Guarana(Plant):
     def __init__(self, world, position):
-        super().__init__(world, position)
+        super().__init__(world, position, 0)
 
     def getColor(self):
         return (20, 200, 150)
@@ -47,7 +47,7 @@ class Guarana(Plant):
 
 class Hogweed(Plant):
     def __init__(self, world, position):
-        super().__init__(world, position)
+        super().__init__(world, position, 10)
 
     def getColor(self):
         return (255, 165, 0)

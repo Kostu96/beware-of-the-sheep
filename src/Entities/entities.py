@@ -1,19 +1,36 @@
 from abc import ABC
 from abc import abstractmethod
-import pygame
+from functools import total_ordering
 import random
+import pygame
 
 
+@total_ordering
 class Entity(ABC):
     pygame.font.init()
     font = pygame.font.Font(None, 24)
 
-    def __init__(self, world, position):
+    def __init__(self, world, position, strength, initiative):
         super().__init__()
         self.size = self.width, self.height = 30, 30
         self.world = world
         self.position = self._convertPos(position)
         self.prevPosition = position
+        self.isAlive = True
+        self.lifeTime = 0
+        self.strength = strength
+        self.initiative = initiative
+
+    def __eq__(self, other):
+        return (self.initiative, self.lifeTime) == (other.initiative, other.lifeTime)
+
+    def __ne__(self, other):
+        return not (self == other)
+
+    def __lt__(self, other):
+        if self.initiative != other.initiative:
+            return self.initiative < other.initiative
+        return self.lifeTime < other.lifeTime
 
     @abstractmethod
     def action(self):
@@ -43,16 +60,16 @@ class Entity(ABC):
 
     def _convertPos(self, pos):
         if pos[0] < 0:
-            pos[0] = self.world.width + pos[0]
+            posX = self.world.width + pos[0]
         else:
-            pos[0] = pos[0] % self.world.width
+            posX = pos[0] % self.world.width
 
         if pos[1] < 0:
-            pos[1] = self.world.height + pos[1]
+            posY = self.world.height + pos[1]
         else:
-            pos[1] = pos[1] % self.world.height
+            posY = pos[1] % self.world.height
 
-        return pos
+        return (posX, posY)
 
     def move(self, dx, dy):
         self.prevPosition = self.position
@@ -65,10 +82,22 @@ class Entity(ABC):
     def moveToPrevPosition(self):
         self.move(self.prevPosition[0], self.prevPosition[1])
 
+    def dodgedAttack(self, strength):
+        return False
+
+    def addStrength(self, amount):
+        self.strength += amount
+
+    def increaseLifeTime(self):
+        self.lifeTime += 1
+
+    def kill(self):
+        self.isAlive = False
+
 
 class Plant(Entity):
-    def __init__(self, world, position):
-        super().__init__(world, position)
+    def __init__(self, world, position, strength):
+        super().__init__(world, position, strength, 0)
 
     def action(self):
         pass
@@ -78,8 +107,8 @@ class Plant(Entity):
 
 
 class Animal(Entity):
-    def __init__(self, world, position):
-        super().__init__(world, position)
+    def __init__(self, world, position, strength, initiative):
+        super().__init__(world, position, strength, initiative)
 
     def action(self):
         v_or_h = random.randint(0, 1)

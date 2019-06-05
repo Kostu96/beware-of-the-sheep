@@ -50,8 +50,21 @@ class World():
         for e in self.entities:
             e.draw(screen, offset)
 
+    def _removeKilledEntities(self):
+        killed = []
+        for i in range(len(self.entities)):
+            if not self.entities[i].isAlive:
+                killed.append(i)
+
+        for k in killed:
+            self.entities.pop(k)
+
     def doTurn(self):
-        pass
+        self._removeKilledEntities()
+        self.entities.sort(reverse=True)
+        for e in self.entities:
+            if e.isAlive:
+                e.action()
 
 
 class Game():
