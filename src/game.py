@@ -6,13 +6,16 @@ from .Entities import plants
 
 
 class World():
-    def __init__(self):
+    def __init__(self, width, height):
+        self.size = self.width, self.height = width, height
+
         self.entities = [
-            
+            plants.Grass(self, [1, 1])
         ]
 
-    def draw(self):
-        pass
+    def draw(self, screen):
+        for e in self.entities:
+            e.draw(screen)
 
 
 class Game():
@@ -25,21 +28,21 @@ class Game():
             'Beware Of The Sheep | Konstanty Misiak 175524'
         )
 
-        self.world = World()
+        self.world = World(16, 16)
 
-    def clear(self):
+    def _clear(self):
         color = 30, 30, 60
         self.screen.fill(color)
 
-    def display(self):
+    def _display(self):
         pygame.display.flip()
 
-    def render(self):
-        self.clear()
-        self.world.draw()
-        self.display()
+    def _render(self):
+        self._clear()
+        self.world.draw(self.screen)
+        self._display()
 
-    def processEvents(self):
+    def _processEvents(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -48,8 +51,8 @@ class Game():
 
     def run(self):
         while 1:
-            self.processEvents()
-            self.render()
+            self._processEvents()
+            self._render()
 
 
 if __name__ == '__main__':

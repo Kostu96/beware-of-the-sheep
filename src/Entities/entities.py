@@ -1,21 +1,23 @@
 from abc import ABC
 from abc import abstractmethod
+from pygame import Rect
 
 
 class Entity(ABC):
     def __init__(self, world, position):
-        super.__init__()
+        super().__init__()
         self.size = self.width, self.height = 30, 30
+        self.world = world
 
-        if position.first < 0:
-            position.first = world.width - position.first
+        if position[0] < 0:
+            position[0] = world.width - position[0]
         else:
-            position.first = position.first % world.width
+            position[0] = position[0] % world.width
 
-        if position.second < 0:
-            position.second = world.height - position.second
+        if position[1] < 0:
+            position[1] = world.height - position[1]
         else:
-            position.second = position.second % world.height
+            position[1] = position[1] % world.height
 
         self.position = position
         self.prevPosition = position
@@ -28,10 +30,20 @@ class Entity(ABC):
     def collision(self, other):
         pass
 
+    @abstractmethod
+    def getColor(self):
+        pass
+
+    def draw(self, screen):
+        screen.fill(self.getColor(),
+                    Rect((self.position[0] * 30,
+                          self.position[1] * 30),
+                    self.size))
+
 
 class Plant(Entity):
-    def __init__(self):
-        super.__init__()
+    def __init__(self, world, position):
+        super().__init__(world, position)
 
     def action(self):
         pass
@@ -41,8 +53,8 @@ class Plant(Entity):
 
 
 class Animal(Entity):
-    def __init__(self):
-        super.__init__()
+    def __init__(self, world, position):
+        super().__init__()
 
     def action(self):
         pass
