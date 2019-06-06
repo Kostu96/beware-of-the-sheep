@@ -2,77 +2,98 @@ from .entities import Animal
 
 
 class Antelope(Animal):
+    color = (140, 70, 0)
+    symbol = 'AT'
+
     def __init__(self, world, position):
         super().__init__(world, position, 4, 4)
 
     def getColor(self):
-        return (150, 75, 0)
+        return Antelope.color
 
-    def getText(self):
-        return 'AT'
+    def getSymbol(self):
+        return Antelope.symbol
 
 
 class CyberSheep(Animal):
+    color = (184, 3, 255)
+    symbol = 'CS'
+
     def __init__(self, world, position):
         super().__init__(world, position, 11, 4)
 
     def getColor(self):
-        return (184, 3, 255)
+        return CyberSheep.color
 
-    def getText(self):
-        return 'CS'
+    def getSymbol(self):
+        return CyberSheep.symbol
 
 
 class Fox(Animal):
+    color = (225, 97, 10)
+    symbol = 'FX'
+
     def __init__(self, world, position):
         super().__init__(world, position, 3, 7)
 
     def getColor(self):
-        return (205, 87, 0)
+        return Fox.color
 
-    def getText(self):
-        return 'FX'
+    def getSymbol(self):
+        return Fox.symbol
 
 
 class Human(Animal):
+    color = (250, 200, 250)
+    symbol = 'HM'
+
     def __init__(self, world, position):
         super().__init__(world, position, 5, 4)
 
     def getColor(self):
-        return (250, 200, 250)
+        return Human.color
 
-    def getText(self):
-        return 'HM'
+    def getSymbol(self):
+        return Human.symbol
 
 
 class Sheep(Animal):
+    color = (250, 250, 250)
+    symbol = 'SH'
+
     def __init__(self, world, position):
         super().__init__(world, position, 4, 4)
 
     def getColor(self):
-        return (250, 250, 250)
+        return Sheep.color
 
-    def getText(self):
-        return 'SH'
+    def getSymbol(self):
+        return Sheep.symbol
 
 
 class Turtle(Animal):
+    color = (30, 90, 30)
+    symbol = 'TT'
+
     def __init__(self, world, position):
         super().__init__(world, position, 2, 1)
 
     def getColor(self):
-        return (30, 90, 30)
+        return Turtle.color
 
-    def getText(self):
-        return 'TT'
+    def getSymbol(self):
+        return Turtle.symbol
 
 
 class Wolf(Animal):
+    color = (100, 110, 110)
+    symbol = 'WF'
+
     def __init__(self, world, position):
         super().__init__(world, position, 9, 5)
 
     def getColor(self):
-        return (100, 110, 110)
+        return Wolf.color
 
-    def getText(self):
-        return 'WF'
+    def getSymbol(self):
+        return Wolf.symbol

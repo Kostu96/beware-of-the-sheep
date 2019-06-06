@@ -45,14 +45,14 @@ class Entity(ABC):
         pass
 
     @abstractmethod
-    def getText(self):
+    def getSymbol(self):
         pass
 
     def draw(self, screen, offset):
         rect = pygame.Rect(offset[0] + self.position[0] * 30,
                            offset[1] + self.position[1] * 30,
                            30, 30)
-        text = Entity.font.render(self.getText(), 1, (0, 0, 0))
+        text = Entity.font.render(self.getSymbol(), 1, (0, 0, 0))
         textpos = text.get_rect(center=rect.center)
 
         screen.fill(self.getColor(), rect)

@@ -1,70 +1,8 @@
 import sys
 import pygame
-from .Entities.entities import Entity
+from .world import World
 from .Entities import animals
 from .Entities import plants
-
-
-class World():
-    def __init__(self, width, height):
-        self.size = self.width, self.height = width, height
-
-        self.entities = [
-            plants.Grass(self, [0, 0]),
-            plants.Guarana(self, [7, 17]),
-            plants.Belladonna(self, [2, 10]),
-            plants.Dandelion(self, [4, 15]),
-            plants.Hogweed(self, [24, 18]),
-
-            animals.Antelope(self, [20, 3]),
-            animals.CyberSheep(self, [14, 17]),
-            animals.Fox(self, [3, 5]),
-            animals.Sheep(self, [2, 15]),
-            animals.Turtle(self, [16, 17]),
-            animals.Wolf(self, [5, 12]),
-
-            animals.Human(self, [10, 10]),
-        ]
-
-    def getRect(self):
-        return pygame.Rect(0, 0, 40 + 30 * self.width, 40 + 30 * self.height)
-
-    def _drawEdges(self, screen, offset):
-        color = (200, 200, 200)
-        screen.fill(color,
-                    pygame.Rect(0, 0,
-                                20, self.getRect().height))
-        screen.fill(color,
-                    pygame.Rect(self.getRect().right - 20, 0,
-                                20, self.getRect().height))
-        screen.fill(color,
-                    pygame.Rect(0, 0,
-                                self.getRect().width, 20))
-        screen.fill(color,
-                    pygame.Rect(0, self.getRect().bottom - 20,
-                                self.getRect().width, 20))
-
-    def draw(self, screen, offset):
-        self._drawEdges(screen, offset)
-        offset = (offset[0] + 20, offset[1] + 20)
-        for e in self.entities:
-            e.draw(screen, offset)
-
-    def _removeKilledEntities(self):
-        killed = []
-        for i in range(len(self.entities)):
-            if not self.entities[i].isAlive:
-                killed.append(i)
-
-        for k in killed:
-            self.entities.pop(k)
-
-    def doTurn(self):
-        self._removeKilledEntities()
-        self.entities.sort(reverse=True)
-        for e in self.entities:
-            if e.isAlive:
-                e.action()
 
 
 class Game():
@@ -74,7 +12,7 @@ class Game():
     def __init__(self):
         pygame.init()
         self.clock = pygame.time.Clock()
-        self.size = self.width, self.height = 1280, 720
+        self.size = self.width, self.height = 1280, 800
         self.screen = pygame.display.set_mode(self.size)
         pygame.display.set_caption(
             'Beware Of The Sheep | Konstanty Misiak 175524'
@@ -95,9 +33,41 @@ class Game():
     def _display(self):
         pygame.display.flip()
 
+    def _drawLegend(self, screen, offset):
+        entities = [
+            plants.Belladonna(self, [0, 0]),
+            plants.Dandelion(self, [0, 0]),
+            plants.Grass(self, [0, 0]),
+            plants.Guarana(self, [0, 0]),
+            plants.Hogweed(self, [0, 0]),
+            animals.Antelope(self, [0, 0]),
+            animals.Fox(self, [0, 0]),
+            animals.Sheep(self, [0, 0]),
+            animals.Turtle(self, [0, 0]),
+            animals.Wolf(self, [0, 0]),
+            animals.CyberSheep(self, [0, 0]),
+            animals.Human(self, [0, 0])
+        ]
+
+        offset = (offset[0], offset[1] + 5)
+        text = Game.font.render('Legend:', 1, (240, 240, 240))
+        screen.blit(text, offset)
+        offset = (offset[0], offset[1] - 10)
+
+        i = 0
+        for e in entities:
+            offset = (offset[0], offset[1] + 32)
+            e.draw(screen, offset)
+            text = Game.font.render(e.__class__.__name__, 1, (240, 240, 240))
+            screen.blit(text, (offset[0] + 40, offset[1] + 6))
+            i += 1
+            if (i % 5 == 0):
+                offset = (offset[0] + 150, offset[1] - 5 * 32)
+
     def _render(self):
         self._clear()
         self.world.draw(self.screen, (0, 0))
+        self._drawLegend(self.screen, (0, self.world.getRect().height))
 
         text = Game.font.render(self.turnButtonText, 1, (0, 0, 0))
         textpos = text.get_rect(center=self.turnButtonRect.center)

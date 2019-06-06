@@ -1,56 +1,72 @@
 from .entities import Plant
+import pygame
 
 
 class Belladonna(Plant):
+    color = (200, 0, 50)
+    symbol = 'BD'
+
     def __init__(self, world, position):
         super().__init__(world, position, 99)
 
     def getColor(self):
-        return (200, 0, 50)
+        return Belladonna.color
 
-    def getText(self):
-        return 'BD'
+    def getSymbol(self):
+        return Belladonna.symbol
 
 
 class Dandelion(Plant):
+    color = (255, 255, 0)
+    symbol = 'DN'
+
     def __init__(self, world, position):
         super().__init__(world, position, 0)
 
     def getColor(self):
-        return (255, 255, 0)
+        return Dandelion.color
 
-    def getText(self):
-        return 'DN'
+    def getSymbol(self):
+        return Dandelion.symbol
 
 
 class Grass(Plant):
+    color = (00, 220, 20)
+    symbol = 'GS'
+
     def __init__(self, world, position):
         super().__init__(world, position, 0)
 
     def getColor(self):
-        return (0, 255, 0)
+        return Grass.color
 
-    def getText(self):
-        return 'GS'
+    def getSymbol(self):
+        return Grass.symbol
 
 
 class Guarana(Plant):
+    color = (20, 200, 150)
+    symbol = 'GA'
+
     def __init__(self, world, position):
         super().__init__(world, position, 0)
 
     def getColor(self):
-        return (20, 200, 150)
+        return Guarana.color
 
-    def getText(self):
-        return 'GA'
+    def getSymbol(self):
+        return Guarana.symbol
 
 
 class Hogweed(Plant):
+    color = (255, 165, 0)
+    symbol = 'HG'
+
     def __init__(self, world, position):
         super().__init__(world, position, 10)
 
     def getColor(self):
-        return (255, 165, 0)
+        return Hogweed.color
 
-    def getText(self):
-        return 'HG'
+    def getSymbol(self):
+        return Hogweed.symbol
