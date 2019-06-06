@@ -13,12 +13,13 @@ class CyberSheep(Animal):
     def action(self):
         pos = self.world.getClosestHogweed(self.position)
         if pos == (-1, -1):
+            super().action()
             return
 
         d1x = self.position[0] - pos[0]
-        d2x = pos[0] + (self.world.width - self.position[0])
+        d2x = pos[0] + (self.world.getWidth() - self.position[0])
         d1y = self.position[1] - pos[1]
-        d2y = pos[1] + (self.world.height - self.position[1])
+        d2y = pos[1] + (self.world.getHeight() - self.position[1])
         dx = abs(d1x if abs(d1x) < abs(d2x) else d2x)
         dy = abs(d1y if abs(d1y) < abs(d2y) else d2y)
         if dx > dy:

@@ -58,14 +58,14 @@ class Entity(ABC):
 
     def _convertPos(self, pos):
         if pos[0] < 0:
-            posX = self.world.width + pos[0]
+            posX = self.world.getWidth() + pos[0]
         else:
-            posX = pos[0] % self.world.width
+            posX = pos[0] % self.world.getWidth()
 
         if pos[1] < 0:
-            posY = self.world.height + pos[1]
+            posY = self.world.getHeight() + pos[1]
         else:
-            posY = pos[1] % self.world.height
+            posY = pos[1] % self.world.getHeight()
 
         return (posX, posY)
 

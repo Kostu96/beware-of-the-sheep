@@ -1,4 +1,5 @@
 from .plant import Plant
+from .animal import Animal
 
 class Guarana(Plant):
     color = (20, 200, 150)
