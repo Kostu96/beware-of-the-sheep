@@ -7,8 +7,10 @@ import pygame
 class World():
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
+        self.entities = []
+        self.messages = []
 
-        self.entities = [
+        newEntities = [
             plants.Grass(self, [0, 0]),
             plants.Guarana(self, [7, 17]),
             plants.Belladonna(self, [2, 10]),
@@ -24,6 +26,9 @@ class World():
 
             animals.Human(self, [10, 10]),
         ]
+
+        for e in newEntities:
+            self.entities.append(e)
 
     def getRect(self):
         return pygame.Rect(0, 0, 40 + 30 * self.width, 40 + 30 * self.height)
@@ -109,3 +114,11 @@ class World():
             self.entities.append(animals.Turtle(self, position))
         elif isinstance(entity, animals.Wolf):
             self.entities.append(animals.Wolf(self, position))
+
+        self.addMessage(str(entity) + ' was spawned at ' + str(position))
+
+    def addMessage(self, message):
+        self.messages.append(message)
+
+    def drawMessages(self, screen, offset):
+        pass

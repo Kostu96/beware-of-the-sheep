@@ -9,6 +9,9 @@ class Belladonna(Plant):
     def __init__(self, world, position):
         super().__init__(world, position, 99)
 
+    def __str__(self):
+        return 'Belladona'
+
     def getColor(self):
         return Belladonna.color
 
@@ -22,6 +25,9 @@ class Dandelion(Plant):
 
     def __init__(self, world, position):
         super().__init__(world, position, 0)
+
+    def __str__(self):
+        return 'Dandelion'
 
     def getColor(self):
         return Dandelion.color
@@ -37,6 +43,9 @@ class Grass(Plant):
     def __init__(self, world, position):
         super().__init__(world, position, 0)
 
+    def __str__(self):
+        return 'Grass'
+
     def getColor(self):
         return Grass.color
 
@@ -51,6 +60,9 @@ class Guarana(Plant):
     def __init__(self, world, position):
         super().__init__(world, position, 0)
 
+    def __str__(self):
+        return 'Guarana'
+
     def getColor(self):
         return Guarana.color
 
@@ -64,6 +76,9 @@ class Hogweed(Plant):
 
     def __init__(self, world, position):
         super().__init__(world, position, 10)
+
+    def __str__(self):
+        return 'Hogweed'
 
     def getColor(self):
         return Hogweed.color

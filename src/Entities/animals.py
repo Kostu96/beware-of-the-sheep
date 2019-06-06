@@ -8,6 +8,9 @@ class Antelope(Animal):
     def __init__(self, world, position):
         super().__init__(world, position, 4, 4)
 
+    def __str__(self):
+        return 'Antelope'
+
     def getColor(self):
         return Antelope.color
 
@@ -21,6 +24,9 @@ class CyberSheep(Animal):
 
     def __init__(self, world, position):
         super().__init__(world, position, 11, 4)
+
+    def __str__(self):
+        return 'Cyber Sheep'
 
     def getColor(self):
         return CyberSheep.color
@@ -36,6 +42,9 @@ class Fox(Animal):
     def __init__(self, world, position):
         super().__init__(world, position, 3, 7)
 
+    def __str__(self):
+        return 'Fox'
+
     def getColor(self):
         return Fox.color
 
@@ -49,6 +58,9 @@ class Human(Animal):
 
     def __init__(self, world, position):
         super().__init__(world, position, 5, 4)
+
+    def __str__(self):
+        return 'Human'
 
     def getColor(self):
         return Human.color
@@ -64,6 +76,9 @@ class Sheep(Animal):
     def __init__(self, world, position):
         super().__init__(world, position, 4, 4)
 
+    def __str__(self):
+        return 'Sheep'
+
     def getColor(self):
         return Sheep.color
 
@@ -78,6 +93,9 @@ class Turtle(Animal):
     def __init__(self, world, position):
         super().__init__(world, position, 2, 1)
 
+    def __str__(self):
+        return 'Turtle'
+
     def getColor(self):
         return Turtle.color
 
@@ -91,6 +109,9 @@ class Wolf(Animal):
 
     def __init__(self, world, position):
         super().__init__(world, position, 9, 5)
+
+    def __str__(self):
+        return 'Wolf'
 
     def getColor(self):
         return Wolf.color

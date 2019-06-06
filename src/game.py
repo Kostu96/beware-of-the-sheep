@@ -3,6 +3,7 @@ import pygame
 from .world import World
 from .Entities import animals
 from .Entities import plants
+from .button import Button
 
 
 class Game():
@@ -20,11 +21,17 @@ class Game():
 
         self.world = World(25, 19)
 
-        self.turnButtonRect = pygame.Rect(1280 - 120, 20, 100, 30)
-        self.turnButtonUnactiveColor = (150, 200, 150)
-        self.turnButtonActiveColor = (180, 100, 180)
-        self.turnButtonColor = self.turnButtonUnactiveColor
-        self.turnButtonText = 'Next Turn'
+        self.buttons = [
+            Button(pygame.Rect(self.world.getRect().width + 20, 20, 100, 30),
+                   'Next Turn',
+                   lambda: self.world.doTurn()),
+            Button(pygame.Rect(self.world.getRect().width + 140, 20, 100, 30),
+                   'Save',
+                   None),
+            Button(pygame.Rect(self.world.getRect().width + 260, 20, 100, 30),
+                   'Load',
+                   None),
+        ]
 
     def _clear(self):
         color = 30, 30, 60
@@ -58,7 +65,7 @@ class Game():
         for e in entities:
             offset = (offset[0], offset[1] + 32)
             e.draw(screen, offset)
-            text = Game.font.render(e.__class__.__name__, 1, (240, 240, 240))
+            text = Game.font.render(str(e), 1, (240, 240, 240))
             screen.blit(text, (offset[0] + 40, offset[1] + 6))
             i += 1
             if (i % 5 == 0):
@@ -69,10 +76,12 @@ class Game():
         self.world.draw(self.screen, (0, 0))
         self._drawLegend(self.screen, (0, self.world.getRect().height))
 
-        text = Game.font.render(self.turnButtonText, 1, (0, 0, 0))
-        textpos = text.get_rect(center=self.turnButtonRect.center)
-        self.screen.fill(self.turnButtonColor, self.turnButtonRect)
-        self.screen.blit(text, textpos)
+        for b in self.buttons:
+            b.draw(self.screen)
+
+        text = Game.font.render('Messages:', 1, (240, 240, 240))
+        self.screen.blit(text, (self.world.getRect().width + 16, 70))
+        self.world.drawMessages(self.screen, (self.world.getRect().width + 20, 100))
 
         self._display()
 
@@ -82,12 +91,12 @@ class Game():
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if self.turnButtonRect.collidepoint(event.pos):
-                        self.turnButtonColor = self.turnButtonActiveColor
+                    for b in self.buttons:
+                        b.handleDownClick(event.pos)
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
-                    self.turnButtonColor = self.turnButtonUnactiveColor
-                    self.world.doTurn()
+                    for b in self.buttons:
+                        b.handleUpClick()
 
     def run(self):
         while 1:
