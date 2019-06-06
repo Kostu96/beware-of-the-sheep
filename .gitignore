@@ -1,1 +1,5 @@
-/bin/
+.venv
+
+.vscode
+
+*.pyc
