@@ -1,12 +1,25 @@
 import sys
 import pygame
+pygame.init()
+
 from .world import World
-from .Entities import animals, plants
 from .button import Button
 
+from .entities.antelope import Antelope
+from .entities.cybersheep import CyberSheep
+from .entities.fox import Fox
+from .entities.human import Human
+from .entities.sheep import Sheep
+from .entities.turtle import Turtle
+from .entities.wolf import Wolf
+
+from .entities.belladonna import Belladonna
+from .entities.dandelion import Dandelion
+from .entities.grass import Grass
+from .entities.guarana import Guarana
+from .entities.hogweed import Hogweed
 
 class Game():
-    pygame.font.init()
     font = pygame.font.Font(None, 24)
 
     def __init__(self):
@@ -41,18 +54,18 @@ class Game():
 
     def _drawLegend(self, screen, offset):
         entities = [
-            plants.Belladonna(self, [0, 0]),
-            plants.Dandelion(self, [0, 0]),
-            plants.Grass(self, [0, 0]),
-            plants.Guarana(self, [0, 0]),
-            plants.Hogweed(self, [0, 0]),
-            animals.Antelope(self, [0, 0]),
-            animals.Fox(self, [0, 0]),
-            animals.Sheep(self, [0, 0]),
-            animals.Turtle(self, [0, 0]),
-            animals.Wolf(self, [0, 0]),
-            animals.CyberSheep(self, [0, 0]),
-            animals.Human(self, [0, 0])
+            Belladonna(self, [0, 0]),
+            Dandelion(self, [0, 0]),
+            Grass(self, [0, 0]),
+            Guarana(self, [0, 0]),
+            Hogweed(self, [0, 0]),
+            Antelope(self, [0, 0]),
+            Fox(self, [0, 0]),
+            Sheep(self, [0, 0]),
+            Turtle(self, [0, 0]),
+            Wolf(self, [0, 0]),
+            CyberSheep(self, [0, 0]),
+            Human(self, [0, 0])
         ]
 
         offset = (offset[0], offset[1] + 5)

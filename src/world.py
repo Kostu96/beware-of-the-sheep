@@ -1,7 +1,20 @@
-from .Entities.entities import Entity, Animal
-from .Entities import animals, plants
 import pygame
 
+from .entities.animal import Animal
+
+from .entities.antelope import Antelope
+from .entities.cybersheep import CyberSheep
+from .entities.fox import Fox
+from .entities.human import Human
+from .entities.sheep import Sheep
+from .entities.turtle import Turtle
+from .entities.wolf import Wolf
+
+from .entities.belladonna import Belladonna
+from .entities.dandelion import Dandelion
+from .entities.grass import Grass
+from .entities.guarana import Guarana
+from .entities.hogweed import Hogweed
 
 class World():
     pygame.font.init()
@@ -13,21 +26,21 @@ class World():
         self.messages = []
 
         newEntities = [
-            #plants.Grass(self, [0, 0]),
-            #plants.Guarana(self, [7, 17]),
-            #plants.Belladonna(self, [2, 10]),
-            #plants.Dandelion(self, [4, 15]),
-            plants.Hogweed(self, [0, 1]),
-            plants.Hogweed(self, [24, 18]),
+            Grass(self, [0, 0]),
+            Guarana(self, [7, 17]),
+            Belladonna(self, [2, 10]),
+            Dandelion(self, [4, 15]),
+            Hogweed(self, [0, 1]),
+            Hogweed(self, [24, 18]),
 
-            #animals.Antelope(self, [20, 3]),
-            animals.CyberSheep(self, [24, 1]),
-            #animals.Fox(self, [3, 5]),
-            #animals.Sheep(self, [2, 15]),
-            #animals.Turtle(self, [16, 17]),
-            #animals.Wolf(self, [5, 12]),
+            Antelope(self, [20, 3]),
+            CyberSheep(self, [24, 1]),
+            Fox(self, [3, 5]),
+            Sheep(self, [2, 15]),
+            Turtle(self, [16, 17]),
+            Wolf(self, [5, 12]),
 
-            #animals.Human(self, [10, 10]),
+            Human(self, [10, 10])
         ]
 
         for e in newEntities:
@@ -79,7 +92,7 @@ class World():
                 if e:
                     self.entities[i].collision(e)
 
-                e.increaseLifeTime()
+                self.entities[i].increaseLifeTime()
 
         self._removeKilledEntities()
 
@@ -116,7 +129,7 @@ class World():
         ]
         for p in positions:
             for e in self.entities:
-                if isinstance(e, Animal) and not isinstance(e, animals.CyberSheep) and e.position == p:
+                if isinstance(e, Animal) and not isinstance(e, CyberSheep) and e.position == p:
                     e.kill()
                     self.addMessage(str(e) + ' was slain by Hogweed')
 
@@ -125,7 +138,7 @@ class World():
         distanceX = -1
         distanceY = -1
         for e in self.entities:
-            if e.isAlive and isinstance(e, plants.Hogweed):
+            if e.isAlive and isinstance(e, Hogweed):
                 d1x = abs(e.position[0] - pos[0])
                 d2x = abs(e.position[0] + (self.width - pos[0]))
                 d1y = abs(e.position[1] - pos[1])
@@ -140,30 +153,30 @@ class World():
         return closest
 
     def spawnEntity(self, entity, position):
-        if isinstance(entity, plants.Belladonna):
-            self.entities.append(plants.Belladonna(self, position))
-        elif isinstance(entity, plants.Dandelion):
-            self.entities.append(plants.Dandelion(self, position))
-        elif isinstance(entity, plants.Grass):
-            self.entities.append(plants.Grass(self, position))
-        elif isinstance(entity, plants.Guarana):
-            self.entities.append(plants.Guarana(self, position))
-        elif isinstance(entity, plants.Hogweed):
-            self.entities.append(plants.Hogweed(self, position))
-        elif isinstance(entity, animals.Antelope):
-            self.entities.append(animals.Antelope(self, position))
-        elif isinstance(entity, animals.CyberSheep):
-            self.entities.append(animals.CyberSheep(self, position))
-        elif isinstance(entity, animals.Fox):
-            self.entities.append(animals.Fox(self, position))
-        elif isinstance(entity, animals.Human):
-            self.entities.append(animals.Human(self, position))
-        elif isinstance(entity, animals.Sheep):
-            self.entities.append(animals.Sheep(self, position))
-        elif isinstance(entity, animals.Turtle):
-            self.entities.append(animals.Turtle(self, position))
-        elif isinstance(entity, animals.Wolf):
-            self.entities.append(animals.Wolf(self, position))
+        if isinstance(entity, Belladonna):
+            self.entities.append(Belladonna(self, position))
+        elif isinstance(entity, Dandelion):
+            self.entities.append(Dandelion(self, position))
+        elif isinstance(entity, Grass):
+            self.entities.append(Grass(self, position))
+        elif isinstance(entity, Guarana):
+            self.entities.append(Guarana(self, position))
+        elif isinstance(entity, Hogweed):
+            self.entities.append(Hogweed(self, position))
+        elif isinstance(entity, Antelope):
+            self.entities.append(Antelope(self, position))
+        elif isinstance(entity, CyberSheep):
+            self.entities.append(CyberSheep(self, position))
+        elif isinstance(entity, Fox):
+            self.entities.append(Fox(self, position))
+        elif isinstance(entity, Human):
+            self.entities.append(Human(self, position))
+        elif isinstance(entity, Sheep):
+            self.entities.append(Sheep(self, position))
+        elif isinstance(entity, Turtle):
+            self.entities.append(Turtle(self, position))
+        elif isinstance(entity, Wolf):
+            self.entities.append(Wolf(self, position))
 
         self.addMessage(str(entity) + ' was spawned at ' + str(position))
 
