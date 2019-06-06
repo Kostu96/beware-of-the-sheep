@@ -1,10 +1,7 @@
 import pygame
 
-
 class Button():
-    pygame.font.init()
     font = pygame.font.Font(None, 24)
-
     unactiveColor = (150, 200, 150)
     activeColor = (180, 100, 180)
 

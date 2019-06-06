@@ -17,7 +17,6 @@ from .entities.guarana import Guarana
 from .entities.hogweed import Hogweed
 
 class World():
-    pygame.font.init()
     font = pygame.font.Font(None, 24)
 
     def __init__(self, width, height):

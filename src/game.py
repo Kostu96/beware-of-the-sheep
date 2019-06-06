@@ -3,27 +3,13 @@ import pygame
 pygame.init()
 
 from .world import World
+from .legend import Legend
 from .button import Button
-
-from .entities.antelope import Antelope
-from .entities.cybersheep import CyberSheep
-from .entities.fox import Fox
-from .entities.human import Human
-from .entities.sheep import Sheep
-from .entities.turtle import Turtle
-from .entities.wolf import Wolf
-
-from .entities.belladonna import Belladonna
-from .entities.dandelion import Dandelion
-from .entities.grass import Grass
-from .entities.guarana import Guarana
-from .entities.hogweed import Hogweed
 
 class Game():
     font = pygame.font.Font(None, 24)
 
     def __init__(self):
-        pygame.init()
         self.clock = pygame.time.Clock()
         self.size = self.width, self.height = 1280, 800
         self.screen = pygame.display.set_mode(self.size)
@@ -32,6 +18,7 @@ class Game():
         )
 
         self.world = World(25, 19)
+        self.legend = Legend(self.world, (0, self.world.getRect().height))
 
         self.buttons = [
             Button(pygame.Rect(self.world.getRect().width + 20, 20, 100, 30),
@@ -52,41 +39,10 @@ class Game():
     def _display(self):
         pygame.display.flip()
 
-    def _drawLegend(self, screen, offset):
-        entities = [
-            Belladonna(self, [0, 0]),
-            Dandelion(self, [0, 0]),
-            Grass(self, [0, 0]),
-            Guarana(self, [0, 0]),
-            Hogweed(self, [0, 0]),
-            Antelope(self, [0, 0]),
-            Fox(self, [0, 0]),
-            Sheep(self, [0, 0]),
-            Turtle(self, [0, 0]),
-            Wolf(self, [0, 0]),
-            CyberSheep(self, [0, 0]),
-            Human(self, [0, 0])
-        ]
-
-        offset = (offset[0], offset[1] + 5)
-        text = Game.font.render('Legend:', 1, (240, 240, 240))
-        screen.blit(text, offset)
-        offset = (offset[0], offset[1] - 10)
-
-        i = 0
-        for e in entities:
-            offset = (offset[0], offset[1] + 32)
-            e.draw(screen, offset)
-            text = Game.font.render(str(e), 1, (240, 240, 240))
-            screen.blit(text, (offset[0] + 40, offset[1] + 6))
-            i += 1
-            if (i % 5 == 0):
-                offset = (offset[0] + 150, offset[1] - 5 * 32)
-
     def _render(self):
         self._clear()
         self.world.draw(self.screen, (0, 0))
-        self._drawLegend(self.screen, (0, self.world.getRect().height))
+        self.legend.draw(self.screen)
 
         for b in self.buttons:
             b.draw(self.screen)
