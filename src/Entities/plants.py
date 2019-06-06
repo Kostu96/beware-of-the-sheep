@@ -1,4 +1,5 @@
-from .entities import Plant
+from .entities import Plant, Animal
+from .animals import CyberSheep
 import pygame
 
 
@@ -11,6 +12,11 @@ class Belladonna(Plant):
 
     def __str__(self):
         return 'Belladona'
+
+    def collision(self, other):
+        if isinstance(other, Animal) and other.strength < self.strength:
+            other.kill()
+            self.world.addMessage(str(other) + ' was slain by ' + str(self))
 
     def getColor(self):
         return Belladonna.color
@@ -28,6 +34,11 @@ class Dandelion(Plant):
 
     def __str__(self):
         return 'Dandelion'
+
+    def action(self):
+        super().action()
+        super().action()
+        super().action()
 
     def getColor(self):
         return Dandelion.color
@@ -63,6 +74,11 @@ class Guarana(Plant):
     def __str__(self):
         return 'Guarana'
 
+    def collision(self, other):
+        if isinstance(other, Animal):
+            other.addStrength(3)
+            self.world.addMessage(str(other) + ' ' + str(other.position) + ' now has ' + str(other.strength) + ' strength')
+
     def getColor(self):
         return Guarana.color
 
@@ -79,6 +95,15 @@ class Hogweed(Plant):
 
     def __str__(self):
         return 'Hogweed'
+
+    def action(self):
+        self.world.killAnimalsAround(self.position)
+        super().action()
+
+    def collision(self, other):
+        if not isinstance(other, CyberSheep):
+            other.kill()
+            self.world.addMessage(str(other) + ' was slain by ' + str(self))
 
     def getColor(self):
         return Hogweed.color

@@ -1,8 +1,7 @@
 import sys
 import pygame
 from .world import World
-from .Entities import animals
-from .Entities import plants
+from .Entities import animals, plants
 from .button import Button
 
 

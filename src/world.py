@@ -1,6 +1,5 @@
-from .Entities.entities import Entity
-from .Entities import animals
-from .Entities import plants
+from .Entities.entities import Entity, Animal
+from .Entities import animals, plants
 import pygame
 
 
@@ -17,8 +16,10 @@ class World():
             plants.Grass(self, [0, 0]),
             plants.Guarana(self, [7, 17]),
             plants.Belladonna(self, [2, 10]),
+            plants.Belladonna(self, [6, 11]),
             plants.Dandelion(self, [4, 15]),
-            plants.Hogweed(self, [24, 18]),
+            plants.Hogweed(self, [24, 1]),
+            plants.Hogweed(self, [15, 14]),
 
             animals.Antelope(self, [20, 3]),
             animals.CyberSheep(self, [14, 17]),
@@ -68,19 +69,19 @@ class World():
 
     def doTurn(self):
         self.messages.clear()
-        self._removeKilledEntities()
         self.entities.sort(reverse=True)
         size = len(self.entities)
         for i in range(size):
             if self.entities[i].isAlive:
                 self.entities[i].action()
+        self._removeKilledEntities()
 
-    def getFreeSpaceAround(self, position):
+    def getFreeSpaceAround(self, pos):
         positions = [
-            (position[0], position[1] - 1 if position[1] > 0 else self.height - 1),
-            (position[0], (position[1] + 1) % self.height),
-            (position[0] - 1 if position[0] > 0 else self.width - 1, position[1]),
-            ((position[0] + 1) % self.width, position[1])
+            (pos[0], pos[1] - 1 if pos[1] > 0 else self.height - 1),
+            (pos[0], (pos[1] + 1) % self.height),
+            (pos[0] - 1 if pos[0] > 0 else self.width - 1, pos[1]),
+            ((pos[0] + 1) % self.width, pos[1])
         ]
         free = []
         for p in positions:
@@ -92,6 +93,19 @@ class World():
                 free.append(p)
 
         return free
+
+    def killAnimalsAround(self, pos):
+        positions = [
+            (pos[0], pos[1] - 1 if pos[1] > 0 else self.height - 1),
+            (pos[0], (pos[1] + 1) % self.height),
+            (pos[0] - 1 if pos[0] > 0 else self.width - 1, pos[1]),
+            ((pos[0] + 1) % self.width, pos[1])
+        ]
+        for p in positions:
+            for e in self.entities:
+                if isinstance(e, Animal) and not isinstance(e, animals.CyberSheep) and e.position == p:
+                    e.kill()
+                    self.addMessage(str(e) + ' was slain by Hogweed')
 
     def spawnEntity(self, entity, position):
         if isinstance(entity, plants.Belladonna):

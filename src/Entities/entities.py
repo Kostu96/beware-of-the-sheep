@@ -1,5 +1,4 @@
-from abc import ABC
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from functools import total_ordering
 import random
 import pygame
@@ -100,7 +99,7 @@ class Plant(Entity):
         super().__init__(world, position, strength, 0)
 
     def action(self):
-        if random.randint(0, 8) == 0:
+        if random.randint(0, 7) == 0:
             free = self.world.getFreeSpaceAround(self.position)
             count = len(free)
             if count > 0:
