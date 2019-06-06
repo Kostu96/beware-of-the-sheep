@@ -1,4 +1,5 @@
 from .entities import Animal
+import random
 
 
 class Antelope(Animal):
@@ -10,6 +11,27 @@ class Antelope(Animal):
 
     def __str__(self):
         return 'Antelope'
+
+    def action(self):
+        v_or_h = random.randint(0, 1)
+        n_or_p = random.randint(0, 1)
+
+        if v_or_h == 1:
+            self.move(0, -2 if n_or_p == 1 else 2)
+        else:
+            self.move(-2 if n_or_p == 2 else 1, 0)
+
+    def collision(self, other):
+        if (random.randint(0, 1) == 1):
+            super().collision(other)
+        else:
+            free = self.world.getFreeSpaceAround(self.position)
+            count = len(free)
+            if count > 0:
+                d = free[random.randint(0, count - 1)]
+                self.move(d[0] - self.position[0], d[1] - self.position[1])
+            else:
+                super().collision(other)
 
     def getColor(self):
         return Antelope.color
@@ -28,6 +50,28 @@ class CyberSheep(Animal):
     def __str__(self):
         return 'Cyber Sheep'
 
+    def action(self):
+        pos = self.world.getClosestHogweed(self.position)
+        if pos == (-1, -1):
+            return
+
+        d1x = self.position[0] - pos[0]
+        d2x = pos[0] + (self.world.width - self.position[0])
+        d1y = self.position[1] - pos[1]
+        d2y = pos[1] + (self.world.height - self.position[1])
+        dx = abs(d1x if abs(d1x) < abs(d2x) else d2x)
+        dy = abs(d1y if abs(d1y) < abs(d2y) else d2y)
+        if dx > dy:
+            if abs(d1x) < abs(d2x):
+                self.move(-1, 0)
+            else:
+                self.move(1, 0)
+        else:
+            if abs(d1y) < abs(d2y):
+                self.move(0, -1)
+            else:
+                self.move(0, 1)
+
     def getColor(self):
         return CyberSheep.color
 
@@ -44,6 +88,9 @@ class Fox(Animal):
 
     def __str__(self):
         return 'Fox'
+
+    def action(self):
+        pass
 
     def getColor(self):
         return Fox.color

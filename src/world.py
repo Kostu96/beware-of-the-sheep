@@ -13,22 +13,21 @@ class World():
         self.messages = []
 
         newEntities = [
-            plants.Grass(self, [0, 0]),
-            plants.Guarana(self, [7, 17]),
-            plants.Belladonna(self, [2, 10]),
-            plants.Belladonna(self, [6, 11]),
-            plants.Dandelion(self, [4, 15]),
-            plants.Hogweed(self, [24, 1]),
-            plants.Hogweed(self, [15, 14]),
+            #plants.Grass(self, [0, 0]),
+            #plants.Guarana(self, [7, 17]),
+            #plants.Belladonna(self, [2, 10]),
+            #plants.Dandelion(self, [4, 15]),
+            plants.Hogweed(self, [0, 1]),
+            plants.Hogweed(self, [24, 18]),
 
-            animals.Antelope(self, [20, 3]),
-            animals.CyberSheep(self, [14, 17]),
-            animals.Fox(self, [3, 5]),
-            animals.Sheep(self, [2, 15]),
-            animals.Turtle(self, [16, 17]),
-            animals.Wolf(self, [5, 12]),
+            #animals.Antelope(self, [20, 3]),
+            animals.CyberSheep(self, [24, 1]),
+            #animals.Fox(self, [3, 5]),
+            #animals.Sheep(self, [2, 15]),
+            #animals.Turtle(self, [16, 17]),
+            #animals.Wolf(self, [5, 12]),
 
-            animals.Human(self, [10, 10]),
+            #animals.Human(self, [10, 10]),
         ]
 
         for e in newEntities:
@@ -56,7 +55,8 @@ class World():
         self._drawEdges(screen, offset)
         offset = (offset[0] + 20, offset[1] + 20)
         for e in self.entities:
-            e.draw(screen, offset)
+            if e.isAlive:
+                e.draw(screen, offset)
 
     def _removeKilledEntities(self):
         killed = []
@@ -74,6 +74,13 @@ class World():
         for i in range(size):
             if self.entities[i].isAlive:
                 self.entities[i].action()
+
+                e = self.getEntityAt(self.entities[i], self.entities[i].position)
+                if e:
+                    self.entities[i].collision(e)
+
+                e.increaseLifeTime()
+
         self._removeKilledEntities()
 
     def getFreeSpaceAround(self, pos):
@@ -87,12 +94,18 @@ class World():
         for p in positions:
             isFree = True
             for e in self.entities:
-                if e.position == p:
+                if e.isAlive and e.position == p:
                     isFree = False
             if isFree:
                 free.append(p)
 
         return free
+
+    def getEntityAt(self, you, pos):
+        for e in self.entities:
+            if e.isAlive and e != you and e.position == pos:
+                return e
+        return None
 
     def killAnimalsAround(self, pos):
         positions = [
@@ -106,6 +119,25 @@ class World():
                 if isinstance(e, Animal) and not isinstance(e, animals.CyberSheep) and e.position == p:
                     e.kill()
                     self.addMessage(str(e) + ' was slain by Hogweed')
+
+    def getClosestHogweed(self, pos):
+        closest = (-1, -1)
+        distanceX = -1
+        distanceY = -1
+        for e in self.entities:
+            if e.isAlive and isinstance(e, plants.Hogweed):
+                d1x = abs(e.position[0] - pos[0])
+                d2x = abs(e.position[0] + (self.width - pos[0]))
+                d1y = abs(e.position[1] - pos[1])
+                d2y = abs(e.position[1] + (self.height - pos[1]))
+                dx = d1x if d1x < d2x else d2x
+                dy = d1y if d1y < d2y else d2y
+                if closest == (-1, -1) or distanceX + distanceY > dx + dy:
+                    closest = e.position
+                    distanceX = dx
+                    distanceY = dy
+
+        return closest
 
     def spawnEntity(self, entity, position):
         if isinstance(entity, plants.Belladonna):
