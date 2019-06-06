@@ -100,7 +100,11 @@ class Plant(Entity):
         super().__init__(world, position, strength, 0)
 
     def action(self):
-        pass
+        if random.randint(0, 8) == 0:
+            free = self.world.getFreeSpaceAround(self.position)
+            count = len(free)
+            if count > 0:
+                self.world.spawnEntity(self, free[random.randint(0, count - 1)])
 
     def collision(self, other):
         pass

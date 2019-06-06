@@ -61,6 +61,51 @@ class World():
     def doTurn(self):
         self._removeKilledEntities()
         self.entities.sort(reverse=True)
-        for e in self.entities:
-            if e.isAlive:
-                e.action()
+        size = len(self.entities)
+        for i in range(size):
+            if self.entities[i].isAlive:
+                self.entities[i].action()
+
+    def getFreeSpaceAround(self, position):
+        positions = [
+            (position[0], position[1] - 1 if position[1] > 0 else self.height - 1),
+            (position[0], (position[1] + 1) % self.height),
+            (position[0] - 1 if position[0] > 0 else self.width - 1, position[1]),
+            ((position[0] + 1) % self.width, position[1])
+        ]
+        free = []
+        for p in positions:
+            isFree = True
+            for e in self.entities:
+                if e.position == p:
+                    isFree = False
+            if isFree:
+                free.append(p)
+
+        return free
+
+    def spawnEntity(self, entity, position):
+        if isinstance(entity, plants.Belladonna):
+            self.entities.append(plants.Belladonna(self, position))
+        elif isinstance(entity, plants.Dandelion):
+            self.entities.append(plants.Dandelion(self, position))
+        elif isinstance(entity, plants.Grass):
+            self.entities.append(plants.Grass(self, position))
+        elif isinstance(entity, plants.Guarana):
+            self.entities.append(plants.Guarana(self, position))
+        elif isinstance(entity, plants.Hogweed):
+            self.entities.append(plants.Hogweed(self, position))
+        elif isinstance(entity, animals.Antelope):
+            self.entities.append(animals.Antelope(self, position))
+        elif isinstance(entity, animals.CyberSheep):
+            self.entities.append(animals.CyberSheep(self, position))
+        elif isinstance(entity, animals.Fox):
+            self.entities.append(animals.Fox(self, position))
+        elif isinstance(entity, animals.Human):
+            self.entities.append(animals.Human(self, position))
+        elif isinstance(entity, animals.Sheep):
+            self.entities.append(animals.Sheep(self, position))
+        elif isinstance(entity, animals.Turtle):
+            self.entities.append(animals.Turtle(self, position))
+        elif isinstance(entity, animals.Wolf):
+            self.entities.append(animals.Wolf(self, position))
