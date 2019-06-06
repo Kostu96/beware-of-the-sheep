@@ -1,4 +1,5 @@
 from .animal import Animal
+import random
 
 class Turtle(Animal):
     color = (30, 90, 30)
@@ -9,6 +10,13 @@ class Turtle(Animal):
 
     def __str__(self):
         return 'Turtle'
+
+    def action(self):
+        if random.randint(0, 3) == 0:
+            super().action()
+
+    def dodgedAttack(self, strength):
+        return strength < 5
 
     def getColor(self):
         return Turtle.color

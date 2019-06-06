@@ -18,13 +18,13 @@ class Game():
         self.__world = World(25, 19, (0, 0))
         self.__legend = Legend(self.__world, (0, self.__world.getRect().height))
         self.__buttons = [
-            Button(pygame.Rect(self.__world.getRect().width + 20, 20, 100, 30),
+            Button(pygame.Rect(self.__world.getRect().width + 20, 10, 100, 30),
                    'Next Turn',
                    lambda: self.__world.doTurn()),
-            Button(pygame.Rect(self.__world.getRect().width + 140, 20, 100, 30),
+            Button(pygame.Rect(self.__world.getRect().width + 140, 10, 100, 30),
                    'Save',
                    None),
-            Button(pygame.Rect(self.__world.getRect().width + 260, 20, 100, 30),
+            Button(pygame.Rect(self.__world.getRect().width + 260, 10, 100, 30),
                    'Load',
                    None),
         ]
@@ -60,3 +60,11 @@ class Game():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.__world.doTurn()
+                elif event.key == pygame.K_UP:
+                    self.__world.setHumanDirection('up')
+                elif event.key == pygame.K_DOWN:
+                    self.__world.setHumanDirection('down')
+                elif event.key == pygame.K_LEFT:
+                    self.__world.setHumanDirection('left')
+                elif event.key == pygame.K_RIGHT:
+                    self.__world.setHumanDirection('right')

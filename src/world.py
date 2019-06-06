@@ -25,8 +25,8 @@ class World():
         self.__position = pos
         self.__size = self.__width, self.__height = width, height
         self.__entities = []
-        self.__messages = Messages((self.getRect().width + 16, 70))
-
+        self.__messages = Messages((self.getRect().width + 16, 110))
+        self.__human = None
         newEntities = [
             Grass(self, [0, 0]),
             Guarana(self, [7, 17]),
@@ -48,6 +48,9 @@ class World():
         for e in newEntities:
             self.spawnEntity(e, e.position)
 
+    def setHumanDirection(self, dir):
+        self.__human.setDirection(dir)
+
     def getWidth(self):
         return self.__width
 
@@ -61,31 +64,34 @@ class World():
         self.__messages.add(message)
 
     def spawnEntity(self, entity, position):
+        e = None
         if isinstance(entity, Belladonna):
-            self.__entities.append(Belladonna(self, position))
+            e = Belladonna(self, position)
         elif isinstance(entity, Dandelion):
-            self.__entities.append(Dandelion(self, position))
+            e = Dandelion(self, position)
         elif isinstance(entity, Grass):
-            self.__entities.append(Grass(self, position))
+            e = Grass(self, position)
         elif isinstance(entity, Guarana):
-            self.__entities.append(Guarana(self, position))
+            e = Guarana(self, position)
         elif isinstance(entity, Hogweed):
-            self.__entities.append(Hogweed(self, position))
+            e = Hogweed(self, position)
         elif isinstance(entity, Antelope):
-            self.__entities.append(Antelope(self, position))
+            e = Antelope(self, position)
         elif isinstance(entity, CyberSheep):
-            self.__entities.append(CyberSheep(self, position))
+            e = CyberSheep(self, position)
         elif isinstance(entity, Fox):
-            self.__entities.append(Fox(self, position))
+            e = Fox(self, position)
         elif isinstance(entity, Human):
-            self.__entities.append(Human(self, position))
+            e = Human(self, position)
+            self.__human = e
         elif isinstance(entity, Sheep):
-            self.__entities.append(Sheep(self, position))
+            e = Sheep(self, position)
         elif isinstance(entity, Turtle):
-            self.__entities.append(Turtle(self, position))
+            e = Turtle(self, position)
         elif isinstance(entity, Wolf):
-            self.__entities.append(Wolf(self, position))
+            e = Wolf(self, position)
 
+        self.__entities.append(e)
         self.addMessage(str(entity) + ' was spawned at ' + str(position))
 
     def getClosestHogweed(self, pos):
@@ -171,6 +177,10 @@ class World():
         for e in self.__entities:
             if e.isAlive:
                 e.draw(screen, offset)
+
+        text = World.font.render('Human direction: ' + self.__human.getDirection(), 1, (240, 240, 240))
+        screen.blit(text, (self.getRect().width + 16, 60))
+
         self.__messages.draw(screen)
 
     def __removeKilledEntities(self):
