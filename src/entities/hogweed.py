@@ -12,7 +12,7 @@ class Hogweed(Plant):
         return 'Hogweed'
 
     def action(self):
-        self.world.killAnimalsAround(self.position)
+        self.world.killAround(self.position, False)
         super().action()
 
     def collision(self, other):

@@ -68,3 +68,7 @@ class Game():
                     self.__world.setHumanDirection('left')
                 elif event.key == pygame.K_RIGHT:
                     self.__world.setHumanDirection('right')
+                elif event.key == pygame.K_BACKSPACE:
+                    self.__world.setHumanDirection(None)
+                elif event.key == pygame.K_RETURN:
+                    self.__world.activateHumanSuperPower()

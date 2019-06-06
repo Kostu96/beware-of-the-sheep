@@ -36,10 +36,11 @@ class World():
             Hogweed(self, [24, 18]),
 
             Antelope(self, [20, 3]),
-            CyberSheep(self, [24, 1]),
+            CyberSheep(self, [20, 5]),
             Fox(self, [3, 5]),
             Sheep(self, [2, 15]),
             Turtle(self, [16, 17]),
+            Turtle(self, [15, 17]),
             Wolf(self, [5, 12]),
 
             Human(self, [10, 10])
@@ -50,6 +51,9 @@ class World():
 
     def setHumanDirection(self, dir):
         self.__human.setDirection(dir)
+
+    def activateHumanSuperPower(self):
+        self.__human.activateSuperPower()
 
     def getWidth(self):
         return self.__width
@@ -137,7 +141,7 @@ class World():
                 return e
         return None
 
-    def killAnimalsAround(self, pos):
+    def killAround(self, pos, everything):
         positions = [
             (pos[0], pos[1] - 1 if pos[1] > 0 else self.__height - 1),
             (pos[0], (pos[1] + 1) % self.__height),
@@ -146,7 +150,7 @@ class World():
         ]
         for p in positions:
             for e in self.__entities:
-                if isinstance(e, Animal) and not isinstance(e, CyberSheep) and e.position == p:
+                if (everything or (isinstance(e, Animal) and not isinstance(e, CyberSheep))) and e.position == p:
                     e.kill()
                     self.addMessage(str(e) + ' was slain by Hogweed')
 
@@ -180,6 +184,8 @@ class World():
 
         text = World.font.render('Human direction: ' + self.__human.getDirection(), 1, (240, 240, 240))
         screen.blit(text, (self.getRect().width + 16, 60))
+        text = World.font.render('Human superpower: ' + self.__human.getSuperPowerStatus(), 1, (240, 240, 240))
+        screen.blit(text, (self.getRect().width + 16, 80))
 
         self.__messages.draw(screen)
 
