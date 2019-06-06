@@ -5,6 +5,9 @@ import pygame
 
 
 class World():
+    pygame.font.init()
+    font = pygame.font.Font(None, 24)
+
     def __init__(self, width, height):
         self.size = self.width, self.height = width, height
         self.entities = []
@@ -28,7 +31,7 @@ class World():
         ]
 
         for e in newEntities:
-            self.entities.append(e)
+            self.spawnEntity(e, e.position)
 
     def getRect(self):
         return pygame.Rect(0, 0, 40 + 30 * self.width, 40 + 30 * self.height)
@@ -64,6 +67,7 @@ class World():
             self.entities.pop(k)
 
     def doTurn(self):
+        self.messages.clear()
         self._removeKilledEntities()
         self.entities.sort(reverse=True)
         size = len(self.entities)
@@ -121,4 +125,7 @@ class World():
         self.messages.append(message)
 
     def drawMessages(self, screen, offset):
-        pass
+        for m in self.messages:
+            text = World.font.render(m, 1, (240, 240, 240))
+            screen.blit(text, offset)
+            offset = (offset[0], offset[1] + 20)

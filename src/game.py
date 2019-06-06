@@ -81,7 +81,7 @@ class Game():
 
         text = Game.font.render('Messages:', 1, (240, 240, 240))
         self.screen.blit(text, (self.world.getRect().width + 16, 70))
-        self.world.drawMessages(self.screen, (self.world.getRect().width + 20, 100))
+        self.world.drawMessages(self.screen, (self.world.getRect().width + 16, 90))
 
         self._display()
 
