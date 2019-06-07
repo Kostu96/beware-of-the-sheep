@@ -17,6 +17,7 @@ from .entities.guarana import Guarana
 from .entities.hogweed import Hogweed
 
 from .messages import Messages
+from .submenu import SubMenu
 
 class World():
     font = pygame.font.Font(None, 24)
@@ -27,6 +28,12 @@ class World():
         self.__entities = []
         self.__messages = Messages((self.getRect().width + 16, 110))
         self.__human = None
+        self.__drawPointer = False
+        self.__pointerPos = ()
+        self.__drawSubMenu = False
+        self.__subMenuPos = ()
+        self.__subMenu = SubMenu(self)
+
         newEntities = [
             Grass(self, [0, 0]),
             Guarana(self, [7, 17]),
@@ -41,6 +48,9 @@ class World():
             Sheep(self, [2, 15]),
             Turtle(self, [16, 17]),
             Turtle(self, [15, 17]),
+            Turtle(self, [14, 16]),
+            Turtle(self, [14, 14]),
+            Turtle(self, [14, 15]),
             Wolf(self, [5, 12]),
 
             Human(self, [10, 10])
@@ -48,6 +58,65 @@ class World():
 
         for e in newEntities:
             self.spawnEntity(e, e.position)
+
+    def save(self, f):
+        f.write(str(self.__size) + '\n')
+        f.write(str(len(self.__entities)) + '\n')
+        for e in self.__entities:
+            f.write(repr(e) + '\n')
+        f.write(repr(self.__messages))
+
+    def load(self, f):
+        self.__size = self.__width, self.__height = eval(f.readline())
+        self.__entities.clear()
+        ecount = int(f.readline())
+        for i in range(ecount):
+            className = f.readline()
+            position = f.readline()
+            constructor = className.rstrip('\n') + '(self, ' + position.rstrip('\n') + ')'
+            entity = eval(constructor)
+            entity.prevPosition = eval(f.readline())
+            entity.lifeTime = int(f.readline())
+            entity.strength = int(f.readline())
+            entity.initiative = int(f.readline())
+            if (className.rstrip('\n') == 'Human'):
+                direc = f.readline()
+                entity.direction = None if direc == 'none' else direc
+                entity.isSuperPowerActive = eval(f.readline())
+                entity.isSuperPowerCooldown = eval(f.readline())
+                entity.superPowerLength = int(f.readline())
+                entity.superPowerCooldown = int(f.readline())
+                self.__human = entity
+            self.__entities.append(entity)
+        mesPos = eval(f.readline())
+        self.__messages = Messages(mesPos)
+        mcount = int(f.readline())
+        for i in range(mcount):
+            self.__messages.add(f.readline().rstrip('\n'))
+
+    def handleLeftClick(self, pos):
+        if self.__drawSubMenu:
+            self.__subMenu.handleLeftClick()
+            self.__drawSubMenu = False
+
+    def handleRightClick(self, pos):
+        if self.__drawPointer:
+            e = self.getEntityAt(None, self.__pointerPos)
+            self.__subMenu.type = 'entity' if e else 'empty'
+            self.__subMenu.choosedPos = self.__pointerPos
+            self.__drawSubMenu = True
+            self.__subMenuPos = pos
+
+    def handleMouseMoved(self, pos):
+        if self.__drawSubMenu:
+            self.__subMenu.handleMouseMoved(self.__subMenuPos, pos)
+
+        rect = pygame.Rect(self.__position[0] + 20, self.__position[1] + 20, 30 * self.__width, 30 * self.__height)
+        if rect.collidepoint(pos):
+            self.__drawPointer = True
+            self.__pointerPos = ((pos[0] - rect.x) // 30, (pos[1] - rect.y) // 30)
+        else:
+            self.__drawPointer = False
 
     def setHumanDirection(self, dir):
         self.__human.setDirection(dir)
@@ -62,7 +131,7 @@ class World():
         return self.__height
 
     def getRect(self):
-        return pygame.Rect(0, 0, 40 + 30 * self.__width, 40 + 30 * self.__height)
+        return pygame.Rect(self.__position, (40 + 30 * self.__width, 40 + 30 * self.__height))
 
     def addMessage(self, message):
         self.__messages.add(message)
@@ -137,9 +206,13 @@ class World():
 
     def getEntityAt(self, you, pos):
         for e in self.__entities:
-            if e.isAlive and e != you and e.position == pos:
+            if e.isAlive and (you == None or e != you) and e.position == pos:
                 return e
         return None
+
+    def removeEntityAt(self, pos):
+        e = self.getEntityAt(None, pos)
+        self.__entities.remove(e)
 
     def killAround(self, pos, everything):
         positions = [
@@ -181,6 +254,16 @@ class World():
         for e in self.__entities:
             if e.isAlive:
                 e.draw(screen, offset)
+
+        if self.__drawPointer:
+            color = (220, 180, 255)
+            screen.fill(color, pygame.Rect(self.__pointerPos[0] * 30 + 20, self.__pointerPos[1] * 30 + 20, 4, 30))
+            screen.fill(color, pygame.Rect(self.__pointerPos[0] * 30 + 46, self.__pointerPos[1] * 30 + 20, 4, 30))
+            screen.fill(color, pygame.Rect(self.__pointerPos[0] * 30 + 20, self.__pointerPos[1] * 30 + 20, 30, 4))
+            screen.fill(color, pygame.Rect(self.__pointerPos[0] * 30 + 20, self.__pointerPos[1] * 30 + 46, 30, 4))
+
+        if self.__drawSubMenu:
+            self.__subMenu.draw(screen, self.__subMenuPos)
 
         text = World.font.render('Human direction: ' + self.__human.getDirection(), 1, (240, 240, 240))
         screen.blit(text, (self.getRect().width + 16, 60))

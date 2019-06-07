@@ -13,22 +13,24 @@ class Entity(ABC):
         self.size = self.width, self.height = 30, 30
         self.world = world
         self.position = self._convertPos(position)
-        self.prevPosition = position
+        self.prevPosition = self.position
         self.isAlive = True
         self.lifeTime = 0
         self.strength = strength
         self.initiative = initiative
 
-    def __eq__(self, other):
-        return (self.initiative, self.lifeTime) == (other.initiative, other.lifeTime)
-
-    def __ne__(self, other):
-        return not (self == other)
-
     def __lt__(self, other):
         if self.initiative != other.initiative:
             return self.initiative < other.initiative
         return self.lifeTime < other.lifeTime
+
+    def __repr__(self):
+        return self.__class__.__name__ + '\n' + \
+               str(self.position) + '\n' + \
+               str(self.prevPosition) + '\n' + \
+               str(self.lifeTime) + '\n' + \
+               str(self.strength) + '\n' + \
+               str(self.initiative)
 
     @abstractmethod
     def action(self):
@@ -78,7 +80,7 @@ class Entity(ABC):
         self.position = self._convertPos((newX, newY))
 
     def moveToPrevPosition(self):
-        self.move(self.prevPosition[0], self.prevPosition[1])
+        self.position = self.prevPosition
 
     def dodgedAttack(self, strength):
         return False
