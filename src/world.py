@@ -59,6 +59,41 @@ class World():
         for e in newEntities:
             self.spawnEntity(e, e.position)
 
+    def save(self, f):
+        f.write(str(self.__size) + '\n')
+        f.write(str(len(self.__entities)) + '\n')
+        for e in self.__entities:
+            f.write(repr(e) + '\n')
+        f.write(repr(self.__messages))
+
+    def load(self, f):
+        self.__size = self.__width, self.__height = eval(f.readline())
+        self.__entities.clear()
+        ecount = int(f.readline())
+        for i in range(ecount):
+            className = f.readline()
+            position = f.readline()
+            constructor = className.rstrip('\n') + '(self, ' + position.rstrip('\n') + ')'
+            entity = eval(constructor)
+            entity.prevPosition = eval(f.readline())
+            entity.lifeTime = int(f.readline())
+            entity.strength = int(f.readline())
+            entity.initiative = int(f.readline())
+            if (className.rstrip('\n') == 'Human'):
+                direc = f.readline()
+                entity.direction = None if direc == 'none' else direc
+                entity.isSuperPowerActive = eval(f.readline())
+                entity.isSuperPowerCooldown = eval(f.readline())
+                entity.superPowerLength = int(f.readline())
+                entity.superPowerCooldown = int(f.readline())
+                self.__human = entity
+            self.__entities.append(entity)
+        mesPos = eval(f.readline())
+        self.__messages = Messages(mesPos)
+        mcount = int(f.readline())
+        for i in range(mcount):
+            self.__messages.add(f.readline().rstrip('\n'))
+
     def handleLeftClick(self, pos):
         if self.__drawSubMenu:
             self.__subMenu.handleLeftClick()

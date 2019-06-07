@@ -8,14 +8,18 @@ from .button import Button
 
 class Game():
     def __init__(self):
+        print('Enter world size X')
+        w = int(input())
+        print('Enter world size Y')
+        h = int(input())
+
         self.__clock = pygame.time.Clock()
         self.__size = self.__width, self.__height = 1280, 800
         self.__screen = pygame.display.set_mode(self.__size)
         pygame.display.set_caption(
             'Beware Of The Sheep | Konstanty Misiak 175524'
         )
-
-        self.__world = World(25, 19, (0, 0))
+        self.__world = World(w, h, (0, 0))
         self.__legend = Legend(self.__world, (0, self.__world.getRect().height))
         self.__buttons = [
             Button(pygame.Rect(self.__world.getRect().width + 20, 10, 100, 30),
@@ -36,10 +40,30 @@ class Game():
             self.__clock.tick(60)
 
     def __save(self):
-        pass
+        try:
+            f = open('save.txt', 'w')
+            self.__world.save(f)
+        finally:
+            f.close()
 
     def __load(self):
-        pass
+        try:
+            f = open('save.txt')
+            self.__world.load(f)
+            self.__legend = Legend(self.__world, (0, self.__world.getRect().height))
+            self.__buttons = [
+            Button(pygame.Rect(self.__world.getRect().width + 20, 10, 100, 30),
+                   'Next Turn',
+                   lambda: self.__world.doTurn()),
+            Button(pygame.Rect(self.__world.getRect().width + 140, 10, 100, 30),
+                   'Save',
+                   lambda: self.__save()),
+            Button(pygame.Rect(self.__world.getRect().width + 260, 10, 100, 30),
+                   'Load',
+                   lambda: self.__load()),
+            ]
+        finally:
+            f.close()
 
     def __render(self):
         self.__screen.fill((30, 30, 50))

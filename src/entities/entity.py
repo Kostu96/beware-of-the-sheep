@@ -24,6 +24,14 @@ class Entity(ABC):
             return self.initiative < other.initiative
         return self.lifeTime < other.lifeTime
 
+    def __repr__(self):
+        return self.__class__.__name__ + '\n' + \
+               str(self.position) + '\n' + \
+               str(self.prevPosition) + '\n' + \
+               str(self.lifeTime) + '\n' + \
+               str(self.strength) + '\n' + \
+               str(self.initiative)
+
     @abstractmethod
     def action(self):
         pass

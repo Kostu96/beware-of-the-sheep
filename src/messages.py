@@ -7,6 +7,13 @@ class Messages():
         self.__position = pos
         self.__messages = []
 
+    def __repr__(self):
+        string = str(self.__position) + '\n'
+        string += str(len(self.__messages)) + '\n'
+        for m in self.__messages:
+            string += m + '\n'
+        return string
+
     def clear(self):
         self.__messages.clear()
 
