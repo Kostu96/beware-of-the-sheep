@@ -23,10 +23,10 @@ class Game():
                    lambda: self.__world.doTurn()),
             Button(pygame.Rect(self.__world.getRect().width + 140, 10, 100, 30),
                    'Save',
-                   None),
+                   lambda: self.__save()),
             Button(pygame.Rect(self.__world.getRect().width + 260, 10, 100, 30),
                    'Load',
-                   None),
+                   lambda: self.__load()),
         ]
 
     def run(self):
@@ -35,11 +35,17 @@ class Game():
             self.__render()
             self.__clock.tick(60)
 
+    def __save(self):
+        pass
+
+    def __load(self):
+        pass
+
     def __render(self):
         self.__screen.fill((30, 30, 50))
 
-        self.__world.draw(self.__screen)
         self.__legend.draw(self.__screen)
+        self.__world.draw(self.__screen)
         for b in self.__buttons:
             b.draw(self.__screen)
         
@@ -51,15 +57,26 @@ class Game():
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
+                    self.__world.handleLeftClick(event.pos)
                     for b in self.__buttons:
                         b.handleDownClick(event.pos)
+                elif event.button == 3:
+                    self.__world.handleRightClick(event.pos)
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
                     for b in self.__buttons:
                         b.handleUpClick()
+            elif event.type == pygame.MOUSEMOTION:
+                self.__world.handleMouseMoved(event.pos)
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_s:
+                    self.__save()
+                elif event.key == pygame.K_l:
+                    self.__load()
+                elif event.key == pygame.K_SPACE:
                     self.__world.doTurn()
+                elif event.key == pygame.K_ESCAPE:
+                    sys.exit()
                 elif event.key == pygame.K_UP:
                     self.__world.setHumanDirection('up')
                 elif event.key == pygame.K_DOWN:
